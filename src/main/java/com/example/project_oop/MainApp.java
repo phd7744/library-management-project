@@ -10,10 +10,12 @@ import java.io.IOException;
 public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("/com/example/project_oop/fxml/main-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
+        FXMLLoader fxmlLoader = new FXMLLoader(
+                MainApp.class.getResource("/com/example/project_oop/fxml/main-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1280, 960);
+        stage.setTitle("Quản Lý Thư Viện");
         stage.setScene(scene);
+//        stage.setMaximized(true);
         stage.show();
     }
 

@@ -1,0 +1,31 @@
+/* =========================================
+   HỆ THỐNG MÀU SẮC QUẢN LÝ THƯ VIỆN
+   ========================================= */
+
+/* 1. Nền thanh Sidebar bên trái */
+.sidebar {
+    -fx-background-color: #1e2b3c;
+}
+
+/* 2. Nền khu vực Dashboard bên phải */
+.dashboard-root {
+    -fx-background-color: #f4f6f9;
+}
+
+/* 3. Nút bấm trên Sidebar */
+.sidebar-btn {
+    -fx-background-color: transparent; /* Mặc định trong suốt để tiệp màu Sidebar */
+    -fx-cursor: hand;
+}
+
+/* Hiệu ứng khi rê chuột vào nút Sidebar */
+.sidebar-btn:hover {
+    -fx-background-color: #2b5b84;
+    -fx-background-radius: 5;
+}
+
+/* 4. Thẻ thống kê (Dashboard Tiles) */
+.stat-card {
+    -fx-background-color: white;
+    -fx-background-radius: 10; /* Bo tròn góc */
+}

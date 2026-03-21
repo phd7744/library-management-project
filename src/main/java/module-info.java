@@ -3,6 +3,7 @@ module com.example.project_oop {
     requires javafx.fxml;
 
     requires org.kordamp.ikonli.javafx;
+    requires java.logging;
 
     opens com.example.project_oop to javafx.fxml;
     exports com.example.project_oop;

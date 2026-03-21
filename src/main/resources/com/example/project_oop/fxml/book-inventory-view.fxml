@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/25"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.project_oop.controller.BookInventoryController">
+   <children>
+      <Label layoutX="237.0" layoutY="192.0" text="Giao Diện Quản Lý Sách" />
+   </children>
+</AnchorPane>
