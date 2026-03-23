@@ -14,18 +14,228 @@
 
 /* 3. Nút bấm trên Sidebar */
 .sidebar-btn {
-    -fx-background-color: transparent; /* Mặc định trong suốt để tiệp màu Sidebar */
+    -fx-background-color: transparent;
     -fx-cursor: hand;
 }
-
-/* Hiệu ứng khi rê chuột vào nút Sidebar */
 .sidebar-btn:hover {
     -fx-background-color: #2b5b84;
     -fx-background-radius: 5;
 }
 
-/* 4. Thẻ thống kê (Dashboard Tiles) */
+/* Nút Đăng xuất riêng biệt */
+.logout-btn:hover {
+    -fx-background-color: rgba(255, 107, 107, 0.15);
+}
+
+
+/* =========================================
+   --- TRANG DASHBOARD ---
+   ========================================= */
+
+/* Thẻ thống kê (Gộp chung) */
 .stat-card {
     -fx-background-color: white;
-    -fx-background-radius: 10; /* Bo tròn góc */
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(226, 232, 240, 0.8), 10, 0, 0, 5);
+}
+
+/* Các viền màu phân loại cho từng thẻ (Accent Left Border) */
+.card-blue {
+    -fx-border-color: transparent transparent transparent #4a90e2;
+    -fx-border-width: 0 0 0 5;
+    -fx-border-radius: 10;
+}
+.card-green {
+    -fx-border-color: transparent transparent transparent #10b981;
+    -fx-border-width: 0 0 0 5;
+    -fx-border-radius: 10;
+}
+.card-orange {
+    -fx-border-color: transparent transparent transparent #f59e0b;
+    -fx-border-width: 0 0 0 5;
+    -fx-border-radius: 10;
+}
+.card-red {
+    -fx-border-color: transparent transparent transparent #ef4444;
+    -fx-border-width: 0 0 0 5;
+    -fx-border-radius: 10;
+}
+
+/* Ẩn bớt đường viền của Biểu đồ Tròn cho sạch sẽ */
+.chart-pie-label-line {
+    -fx-stroke: transparent;
+}
+
+
+/* =========================================
+   --- CÁC TRANG CHUNG (INVENTORY, LOAN, REPORT) ---
+   ========================================= */
+
+/* Ô tìm kiếm bo tròn */
+.search-box {
+    -fx-background-color: white;
+    -fx-background-radius: 20;
+    -fx-border-color: #d3dce6;
+    -fx-border-radius: 20;
+    -fx-padding: 5 15 5 15;
+}
+.search-box:focused-within {
+    -fx-border-color: #4a90e2;
+}
+
+/* Nút bấm chính (Add, Issue) */
+.btn-primary {
+    -fx-background-color: #4a90e2;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+.btn-primary:hover {
+    -fx-background-color: #357abd;
+}
+
+/* Nút Trả sách / Thành công (Màu xanh lá) */
+.btn-success {
+    -fx-background-color: #10b981;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+.btn-success:hover {
+    -fx-background-color: #059669;
+}
+
+/* Thẻ Form nhập liệu (Loan/Return) */
+.action-form-card {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+}
+
+/* Ô nhập liệu hiện đại chung */
+.modern-input {
+    -fx-background-color: #f8fafc;
+    -fx-border-color: #cbd5e1;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 8 12 8 12;
+    -fx-font-size: 14px;
+}
+.modern-input:focused, .modern-input:focused-within {
+    -fx-border-color: #4a90e2;
+    -fx-background-color: #ffffff;
+}
+
+/* Dropdown & DatePicker */
+.combo-filter, .modern-combo, .modern-datepicker {
+    -fx-background-color: #f8fafc;
+    -fx-border-color: #cbd5e1;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 2;
+}
+.combo-filter:focused, .modern-combo:focused, .modern-datepicker:focused {
+    -fx-border-color: #4a90e2;
+}
+
+/* Bảng dữ liệu (TableView) */
+.modern-table {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 5;
+}
+.modern-table .column-header-background {
+    -fx-background-color: #f8fafc;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #e2e8f0;
+}
+.modern-table .column-header {
+    -fx-background-color: transparent;
+    -fx-size: 45px;
+}
+.modern-table .column-header .label {
+    -fx-text-fill: #475569;
+    -fx-font-weight: bold;
+}
+.modern-table .table-row-cell:odd {
+    -fx-background-color: #ffffff;
+}
+.modern-table .table-row-cell:even {
+    -fx-background-color: #fcfcfd;
+}
+.modern-table .table-row-cell:hover {
+    -fx-background-color: #f1f5f9;
+    -fx-cursor: hand;
+}
+
+/* Tuỳ chỉnh màu của các cột biểu đồ BarChart */
+.default-color0.chart-bar {
+    -fx-bar-fill: #4a90e2;
+}
+
+
+/* =========================================
+   --- TRANG LOGIN (SPLIT SCREEN) ---
+   ========================================= */
+
+.login-area {
+    -fx-background-color: white;
+}
+.sidebar-area {
+    -fx-background-color: #1e2b3c;
+}
+
+.system-title-label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 24px;
+}
+
+.signin-title-label {
+    -fx-text-fill: #1e2b3c;
+    -fx-font-weight: bold;
+    -fx-font-size: 32px;
+}
+
+.input-label {
+    -fx-text-fill: #64748b;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+}
+
+/* Khối bao ngoài Icon và TextField của Login */
+.input-block-container {
+    -fx-background-color: #f8fafc;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: #cbd5e1;
+    -fx-padding: 0 15 0 15;
+}
+.input-block-container:focused-within {
+    -fx-border-color: #4a90e2;
+    -fx-background-color: white;
+}
+
+.input-field {
+    -fx-background-color: transparent;
+    -fx-padding: 12 0 12 0;
+    -fx-font-size: 14px;
+    -fx-text-fill: #1e2b3c;
+}
+
+.login-button {
+    -fx-background-color: #4a90e2;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-padding: 12 25 12 25;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(74, 144, 226, 0.4), 8, 0, 0, 3);
+}
+.login-button:hover {
+    -fx-background-color: #357abd;
+}
+
+.forgot-password-link {
+    -fx-text-fill: #4a90e2;
+    -fx-underline: false;
 }

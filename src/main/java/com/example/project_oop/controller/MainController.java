@@ -17,8 +17,6 @@ public class MainController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project_oop/fxml/dash-board.fxml"));
             Parent dashBoardView = loader.load();
-
-            // Bước B: Dán giao diện mới vào giữa BorderPane, đè lên cái Dashboard cũ
             mainBorderPane.setCenter(dashBoardView);
 
         } catch (IOException e) {
@@ -33,11 +31,57 @@ public class MainController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project_oop/fxml/book-inventory-view.fxml"));
             Parent bookInventoryView = loader.load();
-
-            // Bước B: Dán giao diện mới vào giữa BorderPane, đè lên cái Dashboard cũ
             mainBorderPane.setCenter(bookInventoryView);
 
         } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Lỗi tải trang: Kiểm tra lại đường dẫn file FXML!");
+        }
+    }
+
+    @FXML
+    public void showReaderRecords(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project_oop/fxml/reader-records-view.fxml"));
+            Parent readerRecordsView = loader.load();
+            mainBorderPane.setCenter(readerRecordsView);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Lỗi tải trang: Kiểm tra lại đường dẫn file FXML!");
+        }
+    }
+
+    @FXML
+    public void showLoanPage(ActionEvent event){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project_oop/fxml/loan-return-view.fxml"));
+            Parent loanPageView = loader.load();
+            mainBorderPane.setCenter(loanPageView);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Lỗi tải trang: Kiểm tra lại đường dẫn file FXML!");
+        }
+    }
+
+    @FXML
+    public void showReportPage(ActionEvent event){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project_oop/fxml/report-view.fxml"));
+            Parent reportPageView = loader.load();
+            mainBorderPane.setCenter(reportPageView);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Lỗi tải trang: Kiểm tra lại đường dẫn file FXML!");
+        }
+    }
+
+    @FXML
+    public void handleLogout(ActionEvent event){
+        try{
+            System.out.println("Log out page");
+
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Lỗi tải trang: Kiểm tra lại đường dẫn file FXML!");
         }
