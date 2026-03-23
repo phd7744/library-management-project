@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane prefHeight="380.0" prefWidth="520.0" stylesheets="@../css/style.css" styleClass="login-root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project_oop.controller.LoginController">
+    <children>
+        <VBox alignment="CENTER" maxWidth="380.0" prefWidth="380.0" spacing="12.0" styleClass="login-card">
+            <padding>
+                <Insets bottom="28.0" left="28.0" right="28.0" top="28.0" />
+            </padding>
+            <children>
+                <Label text="Library Manager">
+                    <font>
+                        <Font name="System Bold" size="28.0" />
+                    </font>
+                </Label>
+                <Label text="Dang nhap de tiep tuc" textFill="#5f6d7a" />
+                <TextField fx:id="usernameField" promptText="Ten dang nhap" />
+                <PasswordField fx:id="passwordField" onAction="#handleLogin" promptText="Mat khau" />
+                <Label fx:id="messageLabel" textFill="#c62828" />
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogin" prefHeight="40.0" styleClass="login-btn" text="Dang nhap" />
+                <Label text="Tai khoan mau: admin/admin123" textFill="#5f6d7a" />
+            </children>
+        </VBox>
+    </children>
+</StackPane>

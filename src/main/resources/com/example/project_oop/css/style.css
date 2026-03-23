@@ -29,3 +29,25 @@
     -fx-background-color: white;
     -fx-background-radius: 10; /* Bo tròn góc */
 }
+
+/* 5. Login view */
+.login-root {
+    -fx-background-color: linear-gradient(to bottom right, #1e2b3c, #2b5b84);
+}
+
+.login-card {
+    -fx-background-color: white;
+    -fx-background-radius: 14;
+}
+
+.login-btn {
+    -fx-background-color: #1e2b3c;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-background-radius: 8;
+}
+
+.login-btn:hover {
+    -fx-background-color: #2b5b84;
+}
