@@ -204,7 +204,7 @@ main        ← production-ready (chỉ merge sau khi review)
    git pull origin main
    ```
 
-2. **Tạo nhánh mới** từ `develop`:
+2. **Tạo nhánh mới** từ `main`:
    ```bash
    git checkout -b feature/quan-ly-sach
    ```
