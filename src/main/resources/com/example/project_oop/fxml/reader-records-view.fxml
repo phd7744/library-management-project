@@ -68,11 +68,11 @@
             <TableView fx:id="readerTableView" styleClass="modern-table" VBox.vgrow="ALWAYS">
                 <columns>
                     <TableColumn fx:id="colReaderId" prefWidth="80.0" text="Reader ID" />
-                    <TableColumn fx:id="colFullName" prefWidth="200.0" text="Full Name" />
-                    <TableColumn fx:id="colPhone" prefWidth="120.0" text="Phone Number" />
-                    <TableColumn fx:id="colEmail" prefWidth="200.0" text="Email Address" />
-                    <TableColumn fx:id="colRegDate" prefWidth="120.0" text="Reg. Date" />
-                    <TableColumn fx:id="colStatus" prefWidth="100.0" text="Status" />
+                    <TableColumn fx:id="colFullName" prefWidth="220.0" text="Full Name" />
+                    <TableColumn fx:id="colPhone" prefWidth="150.0" text="Phone Number" />
+                    <TableColumn fx:id="colType" prefWidth="150.0" text="Reader Type" />
+                    <TableColumn fx:id="colDebt" prefWidth="120.0" text="Debt ($)" />
+                    <TableColumn fx:id="colStatus" prefWidth="100.0" text="Account Status" />
                     <TableColumn fx:id="colAction" prefWidth="100.0" text="Actions" />
                 </columns>
                 <columnResizePolicy>

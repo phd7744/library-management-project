@@ -33,11 +33,11 @@
                 </Label>
                 <VBox spacing="10.0">
                     <Label text="Reader ID:" textFill="#64748b"><font><Font name="System Bold" size="13.0" /></font></Label>
-                    <TextField promptText="Scan or enter Reader ID..." styleClass="modern-input" />
+                    <TextField promptText="Enter Reader ID (Number)..." styleClass="modern-input" />
                 </VBox>
                 <VBox spacing="10.0">
                     <Label text="Book ID / ISBN:" textFill="#64748b"><font><Font name="System Bold" size="13.0" /></font></Label>
-                    <TextField promptText="Scan or enter Book ID..." styleClass="modern-input" />
+                    <TextField promptText="Enter Book ID (Number)..." styleClass="modern-input" />
                 </VBox>
                 <Region VBox.vgrow="ALWAYS" /> <Button maxWidth="1.7976931348623157E308" prefHeight="40.0" styleClass="btn-primary" text="Issue Book" textFill="WHITE">
                 <font><Font name="System Bold" size="14.0" /></font>
