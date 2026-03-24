@@ -15,7 +15,6 @@ public class DatabaseConnection {
     // Đường dẫn kết nối (Connection URL)
     private static final String URL = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DB_NAME;
 
-
     public static Connection getConnection() {
         Connection connection = null;
         try {
@@ -29,7 +28,8 @@ public class DatabaseConnection {
             System.err.println(" Lỗi: Không tìm thấy thư viện MySQL JDBC Driver!");
             e.printStackTrace();
         } catch (SQLException e) {
-            System.err.println(" Lỗi: Không thể kết nối đến Database '" + DB_NAME + "'. Vui lòng kiểm tra lại XAMPP/MySQL!");
+            System.err.println(
+                    " Lỗi: Không thể kết nối đến Database '" + DB_NAME + "'. Vui lòng kiểm tra lại XAMPP/MySQL!");
             e.printStackTrace();
         }
         return connection;

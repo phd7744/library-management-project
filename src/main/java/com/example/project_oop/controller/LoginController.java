@@ -1,53 +1,54 @@
-package com.example.project_oop.controller; // Bối nhớ sửa package cho đúng
+package com.example.project_oop.controller;
 
+import com.example.project_oop.MainApp;
+import com.example.project_oop.service.LoginService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class LoginController {
 
-    @FXML
-    private Button btnLogin;
+    private final LoginService loginService = new LoginService();
 
     @FXML
-    private Label lblMessage;
+    private TextField usernameField;
 
     @FXML
-    private PasswordField txtPassword;
+    private PasswordField passwordField;
 
     @FXML
-    private TextField txtUsername;
+    private Label messageLabel;
 
     @FXML
-    public void initialize() {
-        System.out.println("Màn hình Đăng nhập đã sẵn sàng!");
-    }
+    public void handleLogin(ActionEvent event) {
+        String username = usernameField.getText();
+        String password = passwordField.getText();
 
-    // HÀM XỬ LÝ KHI BẤM NÚT LOGIN
-    @FXML
-    void handleLogin(ActionEvent event) {
-        String username = txtUsername.getText();
-        String password = txtPassword.getText();
-
-        // 1. Kiểm tra bỏ trống
-        if (username.isEmpty() || password.isEmpty()) {
-            lblMessage.setText("Error: Please enter both username and password!");
+        if (!loginService.authenticate(username, password)) {
+            messageLabel.setText("Sai ten dang nhap hoac mat khau.");
             return;
         }
 
-        // 2. Kiểm tra dữ liệu giả (Sau này sẽ thay bằng check Database)
-        if (username.equals("admin") && password.equals("123")) {
-            lblMessage.setText("Success: Login successful!");
-            lblMessage.setStyle("-fx-text-fill: #10b981;"); // Màu xanh lá thành công
+        try {
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/com/example/project_oop/fxml/main-view.fxml"));
+            Parent root = loader.load();
 
-            // LƯU Ý CHO BỐI: Bài sau mình sẽ hướng dẫn code chuyển sang Main View ở đây nhé!
-            System.out.println(">>> Chuyển sang màn hình chính...");
-        } else {
-            lblMessage.setText("Error: Invalid username or password!");
-            lblMessage.setStyle("-fx-text-fill: #ef4444;"); // Trả lại màu đỏ lỗi
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root, 1280, 960));
+            stage.setTitle("Quan Ly Thu Vien");
+            stage.setResizable(true);
+            stage.centerOnScreen();
+        } catch (IOException e) {
+            messageLabel.setText("Khong the mo man hinh chinh.");
         }
     }
 }

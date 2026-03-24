@@ -16,6 +16,7 @@ public class MainApp extends Application {
         stage.setTitle("Quản Lý Thư Viện");
         stage.setScene(scene);
 //        stage.setMaximized(true);
+    stage.setResizable(false);
         stage.show();
     }
 
