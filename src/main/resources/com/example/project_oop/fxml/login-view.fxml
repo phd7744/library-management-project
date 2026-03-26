@@ -2,114 +2,32 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="mainContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" styleClass="root" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project_oop.controller.LoginController">
+<StackPane prefHeight="380.0" prefWidth="520.0" stylesheets="@../css/style.css" styleClass="login-root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project_oop.controller.LoginController">
     <children>
-
-        <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefWidth="400.0" spacing="20.0" styleClass="sidebar-area" HBox.hgrow="ALWAYS">
+        <VBox alignment="CENTER" maxWidth="380.0" prefWidth="380.0" spacing="12.0" styleClass="login-card">
+            <padding>
+                <Insets bottom="28.0" left="28.0" right="28.0" top="28.0" />
+            </padding>
             <children>
-                <ImageView fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../img/avatar.jpg" />
-                    </image>
-                    <VBox.margin>
-                        <Insets bottom="20.0" />
-                    </VBox.margin>
-                </ImageView>
-                <Label styleClass="system-title-label" text="Library Management System" textAlignment="CENTER" wrapText="true">
+                <Label text="Library Manager">
                     <font>
-                        <Font name="System Bold" size="24.0" />
+                        <Font name="System Bold" size="28.0" />
                     </font>
                 </Label>
+                <Label text="Dang nhap de tiep tuc" textFill="#5f6d7a" />
+                <TextField fx:id="usernameField" promptText="Ten dang nhap" />
+                <PasswordField fx:id="passwordField" onAction="#handleLogin" promptText="Mat khau" />
+                <Label fx:id="messageLabel" textFill="#c62828" />
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogin" prefHeight="40.0" styleClass="login-btn" text="Dang nhap" />
+                <Label text="Tai khoan mau: admin/admin123" textFill="#5f6d7a" />
             </children>
-            <padding>
-                <Insets bottom="50.0" left="30.0" right="30.0" top="50.0" />
-            </padding>
-        </VBox>
-
-        <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefWidth="400.0" spacing="30.0" styleClass="login-area" HBox.hgrow="ALWAYS">
-            <children>
-                <Label styleClass="signin-title-label" text="Sign In">
-                    <font>
-                        <Font name="System Bold" size="32.0" />
-                    </font>
-                    <VBox.margin>
-                        <Insets bottom="10.0" />
-                    </VBox.margin>
-                </Label>
-
-                <VBox spacing="10.0">
-                    <children>
-                        <Label styleClass="input-label" text="Username" />
-                        <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="input-block-container">
-                            <children>
-                                <ImageView fitHeight="20.0" fitWidth="20.0" opacity="0.6" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../img/avatar.jpg" />
-                                    </image>
-                                </ImageView>
-                                <TextField fx:id="txtUsername" prefHeight="45.0" prefWidth="350.0" promptText="Enter your username..." styleClass="input-field" HBox.hgrow="ALWAYS">
-                                    <font>
-                                        <Font size="14.0" />
-                                    </font></TextField>
-                            </children>
-                        </HBox>
-                    </children>
-                </VBox>
-
-                <VBox spacing="10.0">
-                    <children>
-                        <Label styleClass="input-label" text="Password" />
-                        <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="input-block-container">
-                            <children>
-                                <ImageView fitHeight="20.0" fitWidth="20.0" opacity="0.6" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../img/avatar.jpg" />
-                                    </image>
-                                </ImageView>
-                                <PasswordField fx:id="txtPassword" prefHeight="45.0" prefWidth="350.0" promptText="Enter your password..." styleClass="input-field" HBox.hgrow="ALWAYS">
-                                    <font>
-                                        <Font size="14.0" />
-                                    </font></PasswordField>
-                            </children>
-                        </HBox>
-                    </children>
-                </VBox>
-
-                <HBox alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308">
-                    <children>
-                        <Hyperlink styleClass="forgot-password-link" text="Forgot Password?">
-                            <font>
-                                <Font size="13.0" />
-                            </font></Hyperlink>
-                    </children>
-                    <VBox.margin>
-                        <Insets top="-10.0" />
-                    </VBox.margin>
-                </HBox>
-
-                <Button fx:id="btnLogin" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogin" prefHeight="45.0" prefWidth="350.0" styleClass="login-button" text="Login" VBox.vgrow="ALWAYS">
-                    <font>
-                        <Font name="System Bold" size="16.0" />
-                    </font>
-                    <VBox.margin>
-                        <Insets top="10.0" />
-                    </VBox.margin>
-                </Button>
-            </children>
-            <padding>
-                <Insets bottom="50.0" left="40.0" right="40.0" top="50.0" />
-            </padding>
         </VBox>
     </children>
-</HBox>
+</StackPane>

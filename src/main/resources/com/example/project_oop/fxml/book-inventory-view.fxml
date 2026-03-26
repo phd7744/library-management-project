@@ -39,7 +39,7 @@
             </children>
          </HBox>
 
-         <Button alignment="CENTER" prefHeight="40.0" styleClass="btn-primary" text="+ Add New Book" textFill="WHITE">
+         <Button alignment="CENTER" onAction="#handleAddBook" prefHeight="40.0" styleClass="btn-primary" text="+ Add New Book" textFill="WHITE">
             <font><Font name="System Bold" size="14.0" /></font>
             <effect><DropShadow color="#4a90e266" offsetY="4.0" radius="5.0" /></effect>
             <padding><Insets left="20.0" right="20.0" /></padding>
