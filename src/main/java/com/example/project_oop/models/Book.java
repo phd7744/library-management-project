@@ -2,6 +2,7 @@ package com.example.project_oop.models;
 
 public class Book {
     private int id;
+    private String isbn;
     private String title;
     private String category;
     private String author;
@@ -10,8 +11,9 @@ public class Book {
     private int quantity;
     private String status;
 
-    public Book(int id, String title, String category, String author, String publisher, int publishYear, int quantity, String status) {
+    public Book(int id, String isbn, String title, String category, String author, String publisher, int publishYear, int quantity, String status) {
         this.id = id;
+        this.isbn = isbn;
         this.title = title;
         this.category = category;
         this.author = author;
@@ -27,6 +29,14 @@ public class Book {
 
     public void setId(int id){
         this.id = id;
+    }
+
+    public String getIsbn(){
+        return isbn;
+    }
+
+    public void setIsbn(String isbn){
+        this.isbn = isbn;
     }
 
     public String getTitle(){

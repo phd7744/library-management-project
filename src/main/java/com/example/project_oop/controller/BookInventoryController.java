@@ -21,47 +21,55 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import java.util.Optional;
 
-public class BookInventoryController {
+public class BookInventoryController{
 
     @FXML
     private TableView<Book> bookTableView;
 
-    @FXML
+    @FXML 
     private TableColumn<Book, Integer> colId;
 
-    @FXML
+    @FXML 
+    private TableColumn<Book, String> colIsbn;
+
+    @FXML 
     private TableColumn<Book, String> colTitle;
 
-    @FXML
+    @FXML 
     private TableColumn<Book, String> colCategory;
 
-    @FXML
+    @FXML 
     private TableColumn<Book, String> colAuthor;
 
-    @FXML
+    @FXML 
     private TableColumn<Book, String> colPublisher;
-
+    
     @FXML
+    private TableColumn<Book, Integer> colPublishYear;
+
+    @FXML 
     private TableColumn<Book, Integer> colQuantity;
 
-    @FXML
+    @FXML 
     private TableColumn<Book, String> colStatus;
 
-    @FXML
+    @FXML 
     private TableColumn<Book, Void> colAction;
 
     @FXML
     public void initialize(){
         System.out.println("Giao diện Quản lý Sách đã sẵn sàng!");
 
-        // Ánh xạ cột thuộc tính
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colIsbn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
         colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
         colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
         colAuthor.setCellValueFactory(new PropertyValueFactory<>("author"));
         colPublisher.setCellValueFactory(new PropertyValueFactory<>("publisher"));
+        colPublishYear.setCellValueFactory(new PropertyValueFactory<>("publishYear"));
         colQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
@@ -69,11 +77,23 @@ public class BookInventoryController {
         loadBooks();
     }
 
+    // Edit + Delete
     private void setupActionColumn(){
-        colAction.setCellFactory(param -> new TableCell<>() {
+        colAction.setCellFactory(param -> new TableCell<>(){
+            private final Button editBtn = new Button("Edit");
             private final Button deleteBtn = new Button("Delete");
+            private final HBox pane = new HBox(6, editBtn, deleteBtn);
             {
-                deleteBtn.setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-cursor: hand;");
+                editBtn.setStyle("-fx-background-color: #3498db; -fx-text-fill: white; -fx-cursor: hand; -fx-font-size: 12px;");
+                deleteBtn.setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-cursor: hand; -fx-font-size: 12px;");
+
+                /* Edit */
+                editBtn.setOnAction(event -> {
+                    Book book = getTableView().getItems().get(getIndex());
+                    handleEditBook(book);
+                });
+
+                /* Delete */
                 deleteBtn.setOnAction(event -> {
                     Book book = getTableView().getItems().get(getIndex());
                     BookDAO.deleteBook(book.getId());
@@ -82,13 +102,9 @@ public class BookInventoryController {
             }
 
             @Override
-            protected void updateItem(Void item, boolean empty) {
+            protected void updateItem(Void item, boolean empty){
                 super.updateItem(item, empty);
-                if (empty) {
-                    setGraphic(null);
-                } else {
-                    setGraphic(deleteBtn);
-                }
+                setGraphic(empty ? null : pane);
             }
         });
     }
@@ -98,8 +114,77 @@ public class BookInventoryController {
         bookTableView.setItems(books);
     }
 
+    // Add + Edit
+    private static final class BookForm{
+        final TextField tfIsbn = new TextField();
+        final TextField tfTitle = new TextField();
+        final TextField tfAuthor = new TextField();
+        final TextField tfPublisher = new TextField();
+        final TextField tfCategory = new TextField();
+        final Spinner<Integer> spPublishYear;
+        final Spinner<Integer> spQuantity;
+        final GridPane grid = new GridPane();
+
+        BookForm(){
+            int currentYear = java.time.Year.now().getValue();
+            spPublishYear = new Spinner<>(new SpinnerValueFactory.IntegerSpinnerValueFactory(1900, currentYear, currentYear));
+            spPublishYear.setEditable(true);
+            spPublishYear.setPrefWidth(120);
+
+            spQuantity = new Spinner<>(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 9999, 1));
+            spQuantity.setEditable(true);
+            spQuantity.setPrefWidth(100);
+
+            tfIsbn.setPromptText("978-3-16-148410-0");
+            tfTitle.setPromptText("Lập trình Java cơ bản");
+            tfAuthor.setPromptText("Nguyễn Hữu Cầm");
+            tfPublisher.setPromptText("NXB Học viện Công nghệ Bưu chính Viễn thông");
+            tfCategory.setPromptText("Kỹ thuật dữ liệu");
+
+            grid.setHgap(12);
+            grid.setVgap(10);
+            grid.setPadding(new Insets(20, 60, 10, 20));
+
+            grid.add(new Label("ISBN:"), 0, 0); grid.add(tfIsbn, 1, 0);
+            grid.add(new Label("Tiêu đề (*):"), 0, 1); grid.add(tfTitle, 1, 1);
+            grid.add(new Label("Tác giả (*):"), 0, 2); grid.add(tfAuthor, 1, 2);
+            grid.add(new Label("Nhà xuất bản:"), 0, 3); grid.add(tfPublisher, 1, 3);
+            grid.add(new Label("Thể loại (*):"), 0, 4); grid.add(tfCategory, 1, 4);
+            grid.add(new Label("Năm xuất bản:"), 0, 5); grid.add(spPublishYear, 1, 5);
+            grid.add(new Label("Số lượng:"), 0, 6); grid.add(spQuantity, 1, 6);
+        }
+
+        /* Pre-fill form (Edit) */
+        void fillFrom(Book book){
+            tfIsbn.setText(book.getIsbn() == null ? "" : book.getIsbn());
+            tfTitle.setText(book.getTitle());
+            tfAuthor.setText(book.getAuthor());
+            tfPublisher.setText(book.getPublisher() == null ? "" : book.getPublisher());
+            tfCategory.setText(book.getCategory());
+            int py = book.getPublishYear();
+            spPublishYear.getValueFactory().setValue(py > 0 ? py : java.time.Year.now().getValue());
+            spQuantity.getValueFactory().setValue(book.getQuantity() > 0 ? book.getQuantity() : 1);
+        }
+
+        /* Confirm validation */
+        void bindValidation(javafx.scene.Node confirmBtn){
+            confirmBtn.setDisable(true);
+            Runnable check = () -> confirmBtn.setDisable(
+                tfIsbn.getText().isBlank() ||
+                tfTitle.getText().isBlank() ||
+                tfAuthor.getText().isBlank() ||
+                tfCategory.getText().isBlank()
+            );
+            tfIsbn.textProperty().addListener((o, v1, v2) -> check.run());
+            tfTitle.textProperty().addListener((o, v1, v2) -> check.run());
+            tfAuthor.textProperty().addListener((o, v1, v2) -> check.run());
+            tfCategory.textProperty().addListener((o, v1, v2) -> check.run());
+        }
+    }
+
+    /* Add */
     @FXML
-    private void handleAddBook() {
+    private void handleAddBook(){
         // --- Tạo Dialog tùy chỉnh ---
         Dialog<Book> dialog = new Dialog<>();
         dialog.setTitle("Thêm Sách Mới");
@@ -108,63 +193,24 @@ public class BookInventoryController {
         ButtonType addButtonType = new ButtonType("Thêm Sách", ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(addButtonType, ButtonType.CANCEL);
 
-        // --- Các trường nhập liệu ---
-        TextField tfTitle = new TextField();
-        tfTitle.setPromptText("Ví dụ: Lập trình Java cơ bản");
+        BookForm form = new BookForm();
+        dialog.getDialogPane().setContent(form.grid);
 
-        TextField tfAuthor = new TextField();
-        tfAuthor.setPromptText("Ví dụ: Nguyễn Hữu Cầm");
+        javafx.scene.Node addBtn = dialog.getDialogPane().lookupButton(addButtonType);
+        form.bindValidation(addBtn);
 
-        TextField tfPublisher = new TextField();
-        tfPublisher.setPromptText("Ví dụ: NXB Học viện Công nghệ Bưu chính Viễn thông");
-
-        TextField tfCategory = new TextField();
-        tfCategory.setPromptText("Ví dụ: Kỹ thuật dữ liệu");
-
-        int currentYear = java.time.Year.now().getValue();
-        Spinner<Integer> spPublishYear = new Spinner<>();
-        spPublishYear.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1900, currentYear, currentYear));
-        spPublishYear.setEditable(true);
-        spPublishYear.setPrefWidth(120);
-
-        Spinner<Integer> spQuantity = new Spinner<>();
-        spQuantity.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 9999, 1));
-        spQuantity.setEditable(true);
-        spQuantity.setPrefWidth(100);
-
-        // --- Sắp xếp vào GridPane ---
-        GridPane grid = new GridPane();
-        grid.setHgap(12);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(20, 60, 10, 20));
-
-        grid.add(new Label("Tiêu đề (*) :"), 0, 0); grid.add(tfTitle, 1, 0);
-        grid.add(new Label("Tác giả (*) :"), 0, 1); grid.add(tfAuthor, 1, 1);
-        grid.add(new Label("Nhà xuất bản:"), 0, 2); grid.add(tfPublisher, 1, 2);
-        grid.add(new Label("Thể loại (*):"), 0, 3); grid.add(tfCategory, 1, 3);
-        grid.add(new Label("Năm xuất bản:"), 0, 4); grid.add(spPublishYear, 1, 4);
-        grid.add(new Label("Số lượng:"), 0, 5); grid.add(spQuantity, 1, 5);
-
-        dialog.getDialogPane().setContent(grid);
-
-        // Disable nút "Thêm Sách" khi các trường bắt buộc (’*’) còn trống
-        javafx.scene.Node addButton = dialog.getDialogPane().lookupButton(addButtonType);
-        addButton.setDisable(true);
-        tfTitle.textProperty().addListener((obs, old, val) -> addButton.setDisable(val.isBlank() || tfAuthor.getText().isBlank() || tfCategory.getText().isBlank()));
-        tfAuthor.textProperty().addListener((obs, old, val) -> addButton.setDisable(val.isBlank() || tfTitle.getText().isBlank() || tfCategory.getText().isBlank()));
-        tfCategory.textProperty().addListener((obs, old, val) -> addButton.setDisable(val.isBlank() || tfTitle.getText().isBlank() || tfAuthor.getText().isBlank()));
-
-        // --- Chuyển đổi kết quả sang đối tượng Book tạm thời ---
-        dialog.setResultConverter(buttonPressed -> {
-            if(buttonPressed == addButtonType){
+        dialog.setResultConverter(pressed -> {
+            if(pressed == addButtonType){
                 return new Book(0,
-                    tfTitle.getText().trim(),
-                    tfCategory.getText().trim(),
-                    tfAuthor.getText().trim(),
-                    tfPublisher.getText().trim(),
-                    spPublishYear.getValue(),
-                    spQuantity.getValue(),
-                    "ACTIVE");
+                    form.tfIsbn.getText().trim(),
+                    form.tfTitle.getText().trim(),
+                    form.tfCategory.getText().trim(),
+                    form.tfAuthor.getText().trim(),
+                    form.tfPublisher.getText().trim(),
+                    form.spPublishYear.getValue(),
+                    form.spQuantity.getValue(),
+                    "ACTIVE"
+                );
             }
             return null;
         });
@@ -172,6 +218,7 @@ public class BookInventoryController {
         Optional<Book> result = dialog.showAndWait();
         result.ifPresent(book -> {
             boolean success = BookDAO.addBook(
+                book.getIsbn(),
                 book.getTitle(),
                 book.getAuthor(),
                 book.getPublisher(),
@@ -179,19 +226,73 @@ public class BookInventoryController {
                 book.getPublishYear(),
                 book.getQuantity()
             );
-
-            if (success) {
+            if (success){
                 loadBooks();
                 showAlert(AlertType.INFORMATION, "Thành công", "Sách \"" + book.getTitle() + "\" đã được thêm vào danh sách!");
             }
-            else {
+            else{
                 showAlert(AlertType.ERROR, "Thất bại", "Không thể thêm sách. Vui lòng kiểm tra kết nối CSDL.");
             }
         });
     }
 
-    /** Hiển thị hộp thoại thông báo đơn giản. */
-    private void showAlert(AlertType type, String title, String message) {
+    /* Edit */
+    private void handleEditBook(Book book){
+        Dialog<Book> dialog = new Dialog<>();
+        dialog.setTitle("Chỉnh Sửa Sách");
+        dialog.setHeaderText("Cập nhật thông tin sách (ID: " + book.getId() + ")");
+
+        ButtonType saveButtonType = new ButtonType("Lưu Thay Đổi", ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
+
+        BookForm form = new BookForm();
+        form.fillFrom(book);
+        dialog.getDialogPane().setContent(form.grid);
+
+        javafx.scene.Node saveBtn = dialog.getDialogPane().lookupButton(saveButtonType);
+        form.bindValidation(saveBtn);
+
+        dialog.setResultConverter(pressed -> {
+            if(pressed == saveButtonType){
+                return new Book(
+                    book.getId(),
+                    form.tfIsbn.getText().trim(),
+                    form.tfTitle.getText().trim(),
+                    form.tfCategory.getText().trim(),
+                    form.tfAuthor.getText().trim(),
+                    form.tfPublisher.getText().trim(),
+                    form.spPublishYear.getValue(),
+                    form.spQuantity.getValue(),
+                    book.getStatus()
+                );
+            }
+            return null;
+        });
+
+        Optional<Book> result = dialog.showAndWait();
+        result.ifPresent(updated -> {
+            boolean success = BookDAO.updateBook(
+                updated.getId(),
+                updated.getIsbn(),
+                updated.getTitle(),
+                updated.getAuthor(),
+                updated.getPublisher(),
+                updated.getCategory(),
+                updated.getPublishYear(),
+                updated.getQuantity()
+            );
+            if(success){
+                loadBooks();
+                showAlert(AlertType.INFORMATION, "Thành công", "Đã cập nhật sách \"" + updated.getTitle() + "\"!");
+            }
+            else{
+                showAlert(AlertType.ERROR, "Thất bại", "Không thể cập nhật sách. Vui lòng kiểm tra kết nối CSDL.");
+            }
+        });
+    }
+
+    /* Hiển thị hộp thoại thông báo đơn giản. */
+    private void showAlert(AlertType type, String title, String message){
         Alert alert = new Alert(type);
         alert.setTitle(title);
         alert.setHeaderText(null);

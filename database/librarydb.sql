@@ -83,6 +83,7 @@ CREATE TABLE publishers (
 -- =========================
 CREATE TABLE books (
   book_id INT AUTO_INCREMENT PRIMARY KEY,
+  isbn VARCHAR(20) NOT NULL,
   title VARCHAR(200) NOT NULL,
   category_id INT,
   author_id INT,
