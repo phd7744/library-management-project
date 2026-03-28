@@ -10,13 +10,14 @@ import java.sql.SQLException;
 
 import com.example.project_oop.models.Book;
 
-/** CRUD API
-  * Xem danh sách của sách (Read)
-  * Xóa sách (Delete)
-  * Thêm sách (Create)
-  * Cập nhật sách (Update)
-  * Tìm kiếm sách (Read)
-  */
+/**
+ * CRUD API
+ * Xem danh sách của sách (Read)
+ * Xóa sách (Delete)
+ * Thêm sách (Create)
+ * Cập nhật sách (Update)
+ * Tìm kiếm sách (Read)
+ */
 
 public class BookDAO {
 
@@ -127,7 +128,7 @@ public class BookDAO {
     }
 
     /* Update */
-    public static boolean updateBook(int bookId, String isbn, String title, String authorName, String publisherName, String categoryName, int publishYear, int quantity) {
+    public static boolean updateBook(int bookId, String isbn, String title, String authorName, String publisherName, String categoryName, int publishYear, int quantity, String status) {
         try (Connection conn = DatabaseConnection.getConnection()) {
             if (conn == null) return false;
 
@@ -150,8 +151,9 @@ public class BookDAO {
 
             if (authorId < 0 || pubId < 0 || categoryId < 0) return false;
 
-            String updateSql = "UPDATE books SET isbn=?, title=?, author_id=?, pub_id=?, category_id=?, publish_year=?, quantity=? "
-                    + "WHERE book_id=?";
+            String updateSql = "UPDATE books SET isbn=?, title=?, author_id=?, pub_id=?, category_id=?, publish_year=?, quantity=?, status=? "
+                                + "WHERE book_id=?";
+
             try (PreparedStatement pstmt = conn.prepareStatement(updateSql)) {
                 pstmt.setString(1, (isbn == null || isbn.isBlank()) ? "" : isbn.trim());
                 pstmt.setString(2, title);
@@ -164,7 +166,8 @@ public class BookDAO {
                     pstmt.setNull(6, java.sql.Types.INTEGER);
                 }
                 pstmt.setInt(7, quantity);
-                pstmt.setInt(8, bookId);
+                pstmt.setString(8, (status == null || status.isBlank()) ? "ACTIVE" : status);
+                pstmt.setInt(9, bookId);
                 pstmt.executeUpdate();
             }
             return true;
