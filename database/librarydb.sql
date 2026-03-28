@@ -87,6 +87,7 @@ CREATE TABLE books (
   category_id INT,
   author_id INT,
   pub_id INT,
+  publish_year INT,
   quantity INT DEFAULT 0,
 
   status ENUM('ACTIVE','INACTIVE') DEFAULT 'ACTIVE',
