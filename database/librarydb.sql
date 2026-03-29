@@ -6,34 +6,17 @@ CREATE DATABASE librarydb;
 USE librarydb;
 
 -- =========================
--- ACCOUNTS (LOGIN SYSTEM)
--- =========================
-CREATE TABLE accounts (
-  account_id INT AUTO_INCREMENT PRIMARY KEY,
-  username VARCHAR(50) NOT NULL UNIQUE,
-  password VARCHAR(255) NOT NULL,
-
-  role ENUM('ADMIN','EMPLOYEE','READER') NOT NULL,
-  status ENUM('ACTIVE','INACTIVE','BANNED') DEFAULT 'ACTIVE',
-
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
--- =========================
 -- EMPLOYEES
 -- =========================
 CREATE TABLE employees (
   emp_id INT AUTO_INCREMENT PRIMARY KEY,
-  account_id INT UNIQUE,
   full_name VARCHAR(100) NOT NULL,
   phone_number VARCHAR(15),
   shift ENUM('Sáng','Chiều','Tối'),
-
-  CONSTRAINT fk_employee_account
-    FOREIGN KEY (account_id)
-    REFERENCES accounts(account_id)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
+  role ENUM('ADMIN','LIBRARIAN') NOT NULL DEFAULT 'LIBRARIAN',
+  username VARCHAR(50) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL,
+  status ENUM('ACTIVE','INACTIVE','BANNED') DEFAULT 'ACTIVE'
 );
 
 -- =========================
@@ -41,17 +24,13 @@ CREATE TABLE employees (
 -- =========================
 CREATE TABLE readers (
   reader_id INT AUTO_INCREMENT PRIMARY KEY,
-  account_id INT UNIQUE,
   full_name VARCHAR(100) NOT NULL,
   phone_number VARCHAR(15),
   reader_type VARCHAR(50),
   debt DOUBLE DEFAULT 0,
-
-  CONSTRAINT fk_reader_account
-    FOREIGN KEY (account_id)
-    REFERENCES accounts(account_id)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
+  username VARCHAR(50) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL,
+  status ENUM('ACTIVE','INACTIVE','BANNED') DEFAULT 'ACTIVE'
 );
 
 -- =========================
@@ -88,7 +67,6 @@ CREATE TABLE books (
   author_id INT,
   pub_id INT,
   quantity INT DEFAULT 0,
-
   status ENUM('ACTIVE','INACTIVE') DEFAULT 'ACTIVE',
 
   CONSTRAINT fk_book_category
@@ -118,7 +96,6 @@ CREATE TABLE borrow_receipts (
   reader_id INT,
   emp_id INT,
   borrow_date DATE DEFAULT CURRENT_DATE,
-
   status ENUM('BORROWING','RETURNED','OVERDUE') DEFAULT 'BORROWING',
 
   CONSTRAINT fk_receipt_reader
@@ -138,13 +115,14 @@ CREATE TABLE borrow_receipts (
 -- BORROW DETAILS
 -- =========================
 CREATE TABLE borrow_details (
-  receipt_id INT,
-  book_id INT,
-  due_date DATE,
+  detail_id   INT AUTO_INCREMENT PRIMARY KEY,
+  receipt_id  INT,
+  book_id     INT,
+  due_date    DATE,
   return_date DATE,
   fine_amount DOUBLE DEFAULT 0,
 
-  PRIMARY KEY (receipt_id, book_id),
+  UNIQUE (receipt_id, book_id),
 
   CONSTRAINT fk_detail_receipt
     FOREIGN KEY (receipt_id)

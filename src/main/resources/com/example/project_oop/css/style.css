@@ -35,7 +35,6 @@
 /* Thẻ thống kê (Gộp chung) */
 .stat-card {
     -fx-background-color: white;
-<<<<<<< HEAD
     -fx-background-radius: 10;
     -fx-effect: dropshadow(three-pass-box, rgba(226, 232, 240, 0.8), 10, 0, 0, 5);
 }
@@ -239,7 +238,6 @@
 .forgot-password-link {
     -fx-text-fill: #4a90e2;
     -fx-underline: false;
-=======
     -fx-background-radius: 10; /* Bo tròn góc */
 }
 
@@ -263,5 +261,4 @@
 
 .login-btn:hover {
     -fx-background-color: #2b5b84;
->>>>>>> 4a160165ecfbec90cf080409617514ab8dae03da
 }
