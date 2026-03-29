@@ -16,4 +16,8 @@ module com.example.project_oop {
     opens com.example.project_oop.controller to javafx.fxml;
     exports com.example.project_oop.controller.reader;
     opens com.example.project_oop.controller.reader to javafx.fxml;
+    exports com.example.project_oop.controller.borrow;
+    opens com.example.project_oop.controller.borrow to javafx.fxml;
+    exports com.example.project_oop.models.view;
+    opens com.example.project_oop.models.view to javafx.base;
 }

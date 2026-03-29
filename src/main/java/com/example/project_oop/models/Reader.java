@@ -2,19 +2,24 @@ package com.example.project_oop.models;
 
 public class Reader {
     private int id;
-    private String fullname;
+    private String fullName;
     private String phone;
-    private String type;
     private double debt;
+    private String status;
+    private String username;
+    private String password;
 
-    public Reader(){}
+    public Reader() {
+    }
 
-    public Reader(int id, String fullname, String phone, String type, double debt){
+    public Reader(int id, String fullName, String phone, double debt, String status, String username, String password) {
         this.id = id;
-        this.fullname = fullname;
+        this.fullName = fullName;
         this.phone = phone;
-        this.type = type;
         this.debt = debt;
+        this.status = status;
+        this.username = username;
+        this.password = password;
     }
 
     public int getId() {
@@ -25,12 +30,12 @@ public class Reader {
         this.id = id;
     }
 
-    public String getFullname() {
-        return fullname;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getPhone() {
@@ -41,20 +46,32 @@ public class Reader {
         this.phone = phone;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public double getDebt() {
         return debt;
     }
 
     public void setDebt(double debt) {
         this.debt = debt;
+    }
+
+    public String getStatus(){return status;}
+
+    public void setStatus(String status){this.status = status;}
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
 

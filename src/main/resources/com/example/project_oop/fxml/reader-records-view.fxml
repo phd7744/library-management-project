@@ -39,7 +39,7 @@
                 </children>
             </HBox>
 
-            <Button fx:id="addNewReader" alignment="CENTER" prefHeight="40.0" onAction="#handleAddNewReader" styleClass="btn-primary" text="+ Add New Reader" textFill="WHITE">
+            <Button fx:id="addNewReader" alignment="CENTER" onAction="#handleAddNewReader" prefHeight="40.0" styleClass="btn-primary" text="+ Add New Reader" textFill="WHITE">
                 <font><Font name="System Bold" size="14.0" /></font>
                 <effect><DropShadow color="#4a90e266" offsetY="4.0" radius="5.0" /></effect>
                 <padding><Insets left="20.0" right="20.0" /></padding>
@@ -49,9 +49,8 @@
 
     <HBox alignment="CENTER_LEFT" spacing="15.0">
         <children>
-            <ComboBox prefWidth="160.0" promptText="Membership Type" styleClass="combo-filter" />
-            <ComboBox prefWidth="160.0" promptText="Account Status" styleClass="combo-filter" />
-            <Button style="-fx-background-color: transparent; -fx-cursor: hand;" text="Clear Filters" textFill="#8492a6" underline="true">
+            <ComboBox fx:id="cbStatus" prefWidth="160.0" promptText="Account Status" styleClass="combo-filter" />
+            <Button fx:id="btnClearFilter" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Clear Filters" textFill="#8492a6" underline="true">
                 <font><Font name="System Italic" size="13.0" /></font>
             </Button>
         </children>
@@ -70,7 +69,6 @@
                     <TableColumn fx:id="colReaderId" prefWidth="80.0" text="Reader ID" />
                     <TableColumn fx:id="colFullName" prefWidth="220.0" text="Full Name" />
                     <TableColumn fx:id="colPhone" prefWidth="150.0" text="Phone Number" />
-                    <TableColumn fx:id="colType" prefWidth="150.0" text="Reader Type" />
                     <TableColumn fx:id="colDebt" prefWidth="120.0" text="Debt ($)" />
                     <TableColumn fx:id="colStatus" prefWidth="100.0" text="Account Status" />
                     <TableColumn fx:id="colAction" prefWidth="100.0" text="Actions" />
