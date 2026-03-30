@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="720.0" prefWidth="1030.0" spacing="25.0" styleClass="dashboard-root" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project_oop.controller.ReaderRecordsController">
+<VBox prefHeight="720.0" prefWidth="1030.0" spacing="25.0" styleClass="dashboard-root" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project_oop.controller.reader.ReaderRecordsController">
     <padding>
         <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
     </padding>
@@ -39,7 +39,7 @@
                 </children>
             </HBox>
 
-            <Button alignment="CENTER" prefHeight="40.0" styleClass="btn-primary" text="+ Add New Reader" textFill="WHITE">
+            <Button fx:id="addNewReader" alignment="CENTER" onAction="#handleAddNewReader" prefHeight="40.0" styleClass="btn-primary" text="+ Add New Reader" textFill="WHITE">
                 <font><Font name="System Bold" size="14.0" /></font>
                 <effect><DropShadow color="#4a90e266" offsetY="4.0" radius="5.0" /></effect>
                 <padding><Insets left="20.0" right="20.0" /></padding>
@@ -49,9 +49,8 @@
 
     <HBox alignment="CENTER_LEFT" spacing="15.0">
         <children>
-            <ComboBox prefWidth="160.0" promptText="Membership Type" styleClass="combo-filter" />
-            <ComboBox prefWidth="160.0" promptText="Account Status" styleClass="combo-filter" />
-            <Button style="-fx-background-color: transparent; -fx-cursor: hand;" text="Clear Filters" textFill="#8492a6" underline="true">
+            <ComboBox fx:id="cbStatus" prefWidth="160.0" promptText="Account Status" styleClass="combo-filter" />
+            <Button fx:id="btnClearFilter" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Clear Filters" textFill="#8492a6" underline="true">
                 <font><Font name="System Italic" size="13.0" /></font>
             </Button>
         </children>
@@ -65,12 +64,11 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
         </padding>
         <children>
-            <TableView fx:id="readerTableView" styleClass="modern-table" VBox.vgrow="ALWAYS">
+            <TableView fx:id="readerTable" styleClass="modern-table" VBox.vgrow="ALWAYS">
                 <columns>
                     <TableColumn fx:id="colReaderId" prefWidth="80.0" text="Reader ID" />
                     <TableColumn fx:id="colFullName" prefWidth="220.0" text="Full Name" />
                     <TableColumn fx:id="colPhone" prefWidth="150.0" text="Phone Number" />
-                    <TableColumn fx:id="colType" prefWidth="150.0" text="Reader Type" />
                     <TableColumn fx:id="colDebt" prefWidth="120.0" text="Debt ($)" />
                     <TableColumn fx:id="colStatus" prefWidth="100.0" text="Account Status" />
                     <TableColumn fx:id="colAction" prefWidth="100.0" text="Actions" />

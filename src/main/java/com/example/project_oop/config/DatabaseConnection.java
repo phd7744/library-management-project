@@ -1,4 +1,4 @@
-package com.example.project_oop.utils;
+package com.example.project_oop.config;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
