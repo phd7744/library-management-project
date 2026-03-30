@@ -77,6 +77,18 @@ public class MainController {
     }
 
     @FXML
+    public void showCategoryPage(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project_oop/fxml/category-view.fxml"));
+            Parent categoryView = loader.load();
+            mainBorderPane.setCenter(categoryView);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Lỗi tải trang: Kiểm tra lại đường dẫn file FXML!");
+        }
+    }
+
+    @FXML
     public void handleLogout(ActionEvent event){
         try{
             System.out.println("Log out page");

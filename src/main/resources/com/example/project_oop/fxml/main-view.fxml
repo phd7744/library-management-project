@@ -67,6 +67,17 @@
                             <VBox.margin><Insets left="10.0" right="10.0" /></VBox.margin>
                         </Button>
 
+                        <Button fx:id="btnCategoryPage" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showCategoryPage" prefHeight="45.0" styleClass="sidebar-btn" text="Categories" textFill="WHITE">
+                            <font><Font name="System Bold" size="16.0" /></font>
+                            <padding><Insets left="40.0" /></padding>
+                            <graphic>
+                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                    <image><Image url="@../img/avatar.jpg" /></image>
+                                </ImageView>
+                            </graphic>
+                            <VBox.margin><Insets left="10.0" right="10.0" /></VBox.margin>
+                        </Button>
+
                         <Button fx:id="btnReaderReocords" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showReaderRecords" prefHeight="45.0" styleClass="sidebar-btn" text="Reader Records" textFill="WHITE">
                             <font><Font name="System Bold" size="16.0" /></font>
                             <padding><Insets left="40.0" /></padding>
