@@ -33,7 +33,7 @@
                <ImageView fitHeight="18.0" fitWidth="18.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
                   <image><Image url="@../img/avatar.jpg" /></image>
                </ImageView>
-               <TextField promptText="Search by title, author, or ISBN..." style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+               <TextField fx:id="tfSearch" promptText="Search by title, author, or ISBN..." style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
                   <font><Font size="13.0" /></font>
                </TextField>
             </children>
@@ -49,9 +49,9 @@
 
    <HBox alignment="CENTER_LEFT" spacing="15.0">
       <children>
-         <ComboBox prefWidth="160.0" promptText="All Categories" styleClass="combo-filter" />
-         <ComboBox prefWidth="160.0" promptText="Stock Status" styleClass="combo-filter" />
-         <Button style="-fx-background-color: transparent; -fx-cursor: hand;" text="Clear Filters" textFill="#8492a6" underline="true">
+         <ComboBox fx:id="cbCategoryFilter" prefWidth="160.0" promptText="All Categories" styleClass="combo-filter" />
+         <ComboBox fx:id="cbStatusFilter" prefWidth="160.0" promptText="Stock Status" styleClass="combo-filter" />
+         <Button fx:id="btnClearFilters" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Clear Filters" textFill="#8492a6" underline="true">
             <font><Font name="System Italic" size="13.0" /></font>
          </Button>
       </children>

@@ -57,7 +57,7 @@ public class CategoryController{
             private final Button deleteBtn = new Button("Delete");
             private final HBox pane = new HBox(6, editBtn, deleteBtn);
             {
-                editBtn.setStyle("-fx-background-color: #3498db; -fx-text-fill: white; -fx-cursor: hand; -fx-font-size: 12px;");
+                editBtn.setStyle("-fx-background-color: #2ecc71ff; -fx-text-fill: white; -fx-cursor: hand; -fx-font-size: 12px;");
                 deleteBtn.setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-cursor: hand; -fx-font-size: 12px;");
 
                 editBtn.setOnAction(event -> {

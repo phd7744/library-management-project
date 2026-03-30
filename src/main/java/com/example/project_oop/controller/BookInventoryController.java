@@ -62,6 +62,21 @@ public class BookInventoryController {
     private TableColumn<Book, Void> colAction;
 
     @FXML
+    private TextField tfSearch;
+
+    @FXML
+    private ComboBox<String> cbCategoryFilter;
+
+    @FXML
+    private ComboBox<String> cbStatusFilter;
+
+    @FXML
+    private Button btnClearFilters;
+
+    private final com.example.project_oop.service.BookService bookService = new com.example.project_oop.service.BookService();
+    private final ObservableList<Book> masterData = FXCollections.observableArrayList();
+
+    @FXML
     public void initialize() {
         System.out.println(">>> Giao diện Quản lý Sách đã sẵn sàng!");
 
@@ -76,6 +91,18 @@ public class BookInventoryController {
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
         setupActionColumn();
+
+        // Category Filter
+        ObservableList<String> categories = FXCollections.observableArrayList("All Categories");
+        com.example.project_oop.utils.CategoryDAO.getAllCategories().forEach(c -> categories.add(c.getName()));
+        cbCategoryFilter.setItems(categories);
+        cbCategoryFilter.setValue("All Categories");
+
+        // Status Filter
+        cbStatusFilter.setItems(FXCollections.observableArrayList("All Status", "ACTIVE", "INACTIVE"));
+        cbStatusFilter.setValue("All Status");
+
+        bookService.setupSearchFilter(tfSearch, cbCategoryFilter, cbStatusFilter, btnClearFilters, masterData, bookTableView);
         loadBooks();
     }
 
@@ -86,10 +113,8 @@ public class BookInventoryController {
             private final Button deleteBtn = new Button("Delete");
             private final HBox pane = new HBox(6, editBtn, deleteBtn);
             {
-                editBtn.setStyle(
-                        "-fx-background-color: #3498db; -fx-text-fill: white; -fx-cursor: hand; -fx-font-size: 12px;");
-                deleteBtn.setStyle(
-                        "-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-cursor: hand; -fx-font-size: 12px;");
+                editBtn.setStyle("-fx-background-color: #2ecc71ff; -fx-text-fill: white; -fx-cursor: hand; -fx-font-size: 12px;");
+                deleteBtn.setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-cursor: hand; -fx-font-size: 12px;");
 
                 /* Edit */
                 editBtn.setOnAction(event -> {
@@ -114,8 +139,7 @@ public class BookInventoryController {
     }
 
     private void loadBooks() {
-        ObservableList<Book> books = BookDAO.getAllBooks();
-        bookTableView.setItems(books);
+        masterData.setAll(BookDAO.getAllBooks());
     }
 
     // Add & Edit
@@ -214,13 +238,14 @@ public class BookInventoryController {
         void bindValidation(javafx.scene.Node confirmBtn) {
             confirmBtn.setDisable(true);
             Runnable check = () -> confirmBtn.setDisable(
-                    tfIsbn.getText().isBlank() ||
-                            tfTitle.getText().isBlank() ||
-                            tfAuthor.getText().isBlank() ||
-                            tfCategory.getText().isBlank() ||
-                            spQuantity.getValue() <= 0 ||
-                            spPublishYear.getValue() <= 0 ||
-                            cbStatus.getValue().isBlank());
+                tfIsbn.getText().isBlank() ||
+                    tfTitle.getText().isBlank() ||
+                    tfAuthor.getText().isBlank() ||
+                    tfCategory.getText().isBlank() ||
+                    spQuantity.getValue() <= 0 ||
+                    spPublishYear.getValue() <= 0 ||
+                    cbStatus.getValue().isBlank()
+            );
             tfIsbn.textProperty().addListener((o, v1, v2) -> check.run());
             tfTitle.textProperty().addListener((o, v1, v2) -> check.run());
             tfAuthor.textProperty().addListener((o, v1, v2) -> check.run());
@@ -260,14 +285,14 @@ public class BookInventoryController {
         dialog.setResultConverter(pressed -> {
             if (pressed == addButtonType) {
                 return new Book(0,
-                        form.tfIsbn.getText().trim(),
-                        form.tfTitle.getText().trim(),
-                        form.tfCategory.getText().trim(),
-                        form.tfAuthor.getText().trim(),
-                        form.tfPublisher.getText().trim(),
-                        form.spPublishYear.getValue(),
-                        form.getQuantity(),
-                        form.getStatus());
+                    form.tfIsbn.getText().trim(),
+                    form.tfTitle.getText().trim(),
+                    form.tfCategory.getText().trim(),
+                    form.tfAuthor.getText().trim(),
+                    form.tfPublisher.getText().trim(),
+                    form.spPublishYear.getValue(),
+                    form.getQuantity(),
+                    form.getStatus());
             }
             return null;
         });
@@ -275,13 +300,14 @@ public class BookInventoryController {
         Optional<Book> result = dialog.showAndWait();
         result.ifPresent(book -> {
             boolean success = BookDAO.addBook(
-                    book.getIsbn(),
-                    book.getTitle(),
-                    book.getAuthor(),
-                    book.getPublisher(),
-                    book.getCategory(),
-                    book.getPublishYear(),
-                    book.getQuantity());
+                book.getIsbn(),
+                book.getTitle(),
+                book.getAuthor(),
+                book.getPublisher(),
+                book.getCategory(),
+                book.getPublishYear(),
+                book.getQuantity()
+            );
             if (success) {
                 loadBooks();
                 showAlert(AlertType.INFORMATION, "Thành công",
@@ -302,7 +328,7 @@ public class BookInventoryController {
         dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
 
         BookForm form = new BookForm();
-        form.fillFrom(book); // Pre-fill + áp dụng quy tắc status
+        form.fillFrom(book);
         dialog.getDialogPane().setContent(form.grid);
 
         javafx.scene.Node saveBtn = dialog.getDialogPane().lookupButton(saveButtonType);
@@ -311,15 +337,16 @@ public class BookInventoryController {
         dialog.setResultConverter(pressed -> {
             if (pressed == saveButtonType) {
                 return new Book(
-                        book.getId(),
-                        form.tfIsbn.getText().trim(),
-                        form.tfTitle.getText().trim(),
-                        form.tfCategory.getText().trim(),
-                        form.tfAuthor.getText().trim(),
-                        form.tfPublisher.getText().trim(),
-                        form.spPublishYear.getValue(),
-                        form.getQuantity(),
-                        form.getStatus());
+                    book.getId(),
+                    form.tfIsbn.getText().trim(),
+                    form.tfTitle.getText().trim(),
+                    form.tfCategory.getText().trim(),
+                    form.tfAuthor.getText().trim(),
+                    form.tfPublisher.getText().trim(),
+                    form.spPublishYear.getValue(),
+                    form.getQuantity(),
+                    form.getStatus()
+                );
             }
             return null;
         });
@@ -345,7 +372,7 @@ public class BookInventoryController {
         });
     }
 
-    /* Hiển thị hộp thoại thông báo đơn giản. */
+    /* Hiển thị thông báo. */
     private void showAlert(AlertType type, String title, String message) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
