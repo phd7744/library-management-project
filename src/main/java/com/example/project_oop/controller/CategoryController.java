@@ -38,6 +38,7 @@ public class CategoryController{
 
     @FXML
     public void initialize(){
+        System.out.println(">>> Giao diện Quản lý Thể loại đã sẵn sàng!");
         colCatId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colCatName.setCellValueFactory(new PropertyValueFactory<>("name"));
         setupActionColumn();

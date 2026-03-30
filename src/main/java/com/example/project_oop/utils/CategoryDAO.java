@@ -1,5 +1,6 @@
 package com.example.project_oop.utils;
 
+import com.example.project_oop.config.DatabaseConnection;
 import com.example.project_oop.models.Category;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
