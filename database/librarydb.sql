@@ -62,10 +62,12 @@ CREATE TABLE publishers (
 -- =========================
 CREATE TABLE books (
   book_id INT AUTO_INCREMENT PRIMARY KEY,
+  isbn VARCHAR(20) NOT NULL,
   title VARCHAR(200) NOT NULL,
   category_id INT,
   author_id INT,
   pub_id INT,
+  publish_year INT,
   quantity INT DEFAULT 0,
   status ENUM('ACTIVE','INACTIVE') DEFAULT 'ACTIVE',
 

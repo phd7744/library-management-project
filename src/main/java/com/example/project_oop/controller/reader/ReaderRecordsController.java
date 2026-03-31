@@ -107,7 +107,7 @@ public class ReaderRecordsController {
                     Button editBtn = new Button("Edit");
                     Button deleteBtn = new Button("Delete");
 
-                    editBtn.setStyle("-fx-background-color: #2ecc71; -fx-text-fill: white;");
+                    editBtn.setStyle("-fx-background-color: #2ecc71ff; -fx-text-fill: white;");
                     deleteBtn.setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white;");
 
                     editBtn.setOnAction(e -> {
