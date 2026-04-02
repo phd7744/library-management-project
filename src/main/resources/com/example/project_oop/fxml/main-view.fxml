@@ -29,12 +29,12 @@
                                 <Insets top="30.0" />
                             </VBox.margin>
                         </ImageView>
-                        <Label text="Phạm Hữu Dũng" textFill="WHITE">
+                        <Label fx:id="userNameLabel" text="Phạm Hữu Dũng" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="24.0" />
                             </font>
                         </Label>
-                        <Label text="Admin" textFill="LIGHTBLUE">
+                        <Label fx:id="userRoleLabel" text="Admin" textFill="LIGHTBLUE">
                             <font>
                                 <Font name="System Bold Italic" size="18.0" />
                             </font>

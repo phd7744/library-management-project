@@ -262,3 +262,18 @@
 .login-btn:hover {
     -fx-background-color: #2b5b84;
 }
+
+.login-toggle {
+    -fx-background-color: transparent;
+    -fx-background-radius: 8;
+    -fx-border-color: #cbd5e1;
+    -fx-border-radius: 8;
+    -fx-text-fill: #1e2b3c;
+    -fx-cursor: hand;
+}
+
+.login-toggle:selected {
+    -fx-background-color: #1e2b3c;
+    -fx-border-color: #1e2b3c;
+    -fx-text-fill: white;
+}
