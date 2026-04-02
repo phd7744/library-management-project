@@ -1,0 +1,150 @@
+Apr 02, 2026 10:46:20 PM com.example.project_oop.utils.AppLogger configure
+INFO: File logging configured at logs/library-manager.log
+Apr 02, 2026 10:46:20 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 17.0.6
+Apr 02, 2026 10:46:28 PM com.example.project_oop.controller.LoginController handleLogin
+INFO: Login attempt: role=Admin, username=admin
+Apr 02, 2026 10:46:28 PM com.example.project_oop.controller.LoginController handleLogin
+INFO: Login success: role=Admin, username=admin
+Apr 02, 2026 10:46:28 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=Login success
+Apr 02, 2026 10:46:28 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 17.0.6
+Apr 02, 2026 10:46:28 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 17.0.6
+Apr 02, 2026 10:46:28 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=Open main screen
+Apr 02, 2026 10:46:39 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=Open Book Inventory
+Apr 02, 2026 10:46:39 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 17.0.6
+Apr 02, 2026 10:46:42 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=Open Book Inventory
+Apr 02, 2026 10:46:42 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 17.0.6
+Apr 02, 2026 10:46:44 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=Open Book Inventory
+Apr 02, 2026 10:46:44 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 17.0.6
+Apr 02, 2026 10:46:47 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=Open Category
+Apr 02, 2026 10:46:47 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 17.0.6
+Apr 02, 2026 10:46:47 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=Open Category
+Apr 02, 2026 10:46:47 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 17.0.6
+Apr 02, 2026 10:46:48 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=Open Category
+Apr 02, 2026 10:46:48 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 17.0.6
+Apr 02, 2026 10:46:48 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=Open Category
+Apr 02, 2026 10:46:48 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 17.0.6
+Apr 02, 2026 10:47:02 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=Open Category
+Apr 02, 2026 10:47:02 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 17.0.6
+Apr 02, 2026 10:47:03 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=Open Reader Records
+Apr 02, 2026 10:47:03 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 17.0.6
+Apr 02, 2026 10:47:04 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=Open Loan Return
+Apr 02, 2026 10:47:04 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 17.0.6
+Apr 02, 2026 10:47:05 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=Open Report
+Apr 02, 2026 10:47:05 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 17.0.6
+Apr 02, 2026 10:47:05 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=Open Loan Return
+Apr 02, 2026 10:47:05 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 17.0.6
+Apr 02, 2026 10:47:53 PM com.example.project_oop.utils.AppLogger configure
+INFO: File logging configured at logs/library-manager.log
+Apr 02, 2026 10:47:54 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 17.0.6
+Apr 02, 2026 10:48:01 PM com.example.project_oop.controller.LoginController handleLogin
+INFO: Login attempt: role=Admin, username=admin
+Apr 02, 2026 10:48:01 PM com.example.project_oop.controller.LoginController handleLogin
+INFO: Login success: role=Admin, username=admin
+Apr 02, 2026 10:48:01 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=Login success
+Apr 02, 2026 10:48:01 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 17.0.6
+Apr 02, 2026 10:48:01 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 17.0.6
+Apr 02, 2026 10:48:01 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=Open main screen
+Apr 02, 2026 10:48:03 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=UI action: Dashboard
+Apr 02, 2026 10:48:03 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=Open Dashboard
+Apr 02, 2026 10:48:03 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 17.0.6
+Apr 02, 2026 10:48:03 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=UI action: Book Inventory
+Apr 02, 2026 10:48:03 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=Open Book Inventory
+Apr 02, 2026 10:48:03 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 17.0.6
+Apr 02, 2026 10:48:05 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=UI action: Categories
+Apr 02, 2026 10:48:05 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=Open Category
+Apr 02, 2026 10:48:05 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 17.0.6
+Apr 02, 2026 10:48:16 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=UI action: + Add New Category
+Apr 02, 2026 10:48:26 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=UI action: Report
+Apr 02, 2026 10:48:26 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=Open Report
+Apr 02, 2026 10:48:26 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 17.0.6
+Apr 02, 2026 10:48:31 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=UI action: Dashboard
+Apr 02, 2026 10:48:31 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=Open Dashboard
+Apr 02, 2026 10:48:31 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 17.0.6
+Apr 02, 2026 10:48:32 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=UI action: Dashboard
+Apr 02, 2026 10:48:32 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=Open Dashboard
+Apr 02, 2026 10:48:32 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 17.0.6
+Apr 02, 2026 10:48:33 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=UI action: Dashboard
+Apr 02, 2026 10:48:33 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=Open Dashboard
+Apr 02, 2026 10:48:33 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 17.0.6
+Apr 02, 2026 10:48:34 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=UI action: Book Inventory
+Apr 02, 2026 10:48:34 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=Open Book Inventory
+Apr 02, 2026 10:48:34 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 17.0.6
+Apr 02, 2026 10:48:35 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=UI action: Categories
+Apr 02, 2026 10:48:35 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=Open Category
+Apr 02, 2026 10:48:35 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 17.0.6
+Apr 02, 2026 10:48:36 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=UI action: Loan/Return
+Apr 02, 2026 10:48:36 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=Open Loan Return
+Apr 02, 2026 10:48:36 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 17.0.6
+Apr 02, 2026 10:48:49 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=UI action: Categories
+Apr 02, 2026 10:48:49 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=Open Category
+Apr 02, 2026 10:48:49 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 17.0.6
+Apr 02, 2026 10:48:50 PM com.example.project_oop.utils.AppLogger logUserAction
+INFO: User action: role=Admin, username=admin, action=UI action: + Add New Category

@@ -1,5 +1,6 @@
 package com.example.project_oop;
 
+import com.example.project_oop.utils.AppLogger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,6 +11,8 @@ import java.io.IOException;
 public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+    AppLogger.configure();
+
         FXMLLoader fxmlLoader = new FXMLLoader(
         MainApp.class.getResource("/com/example/project_oop/fxml/login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 960);
