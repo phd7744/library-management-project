@@ -26,7 +26,7 @@
                 <PasswordField fx:id="passwordField" onAction="#handleLogin" promptText="Mat khau" />
                 <Label fx:id="messageLabel" textFill="#c62828" />
                 <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogin" prefHeight="40.0" styleClass="login-btn" text="Dang nhap" />
-                <Label text="Mau: admin/admin123 | employee/employee123 | reader/reader123" textFill="#5f6d7a" wrapText="true" />
+                <Label text="Tai khoan mau: admin/admin123" textFill="#5f6d7a" />
             </children>
         </VBox>
     </children>
