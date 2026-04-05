@@ -43,6 +43,7 @@
                 <PasswordField fx:id="passwordField" onAction="#handleLogin" promptText="Mat khau" />
                 <Label fx:id="messageLabel" textFill="#c62828" />
                 <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogin" prefHeight="40.0" styleClass="login-btn" text="Dang nhap" />
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleOpenCustomerLogin" prefHeight="36.0" style="-fx-background-color: #e2e8f0; -fx-text-fill: #1f2937; -fx-background-radius: 8;" text="Customer Login (Test)" />
                 <Label fx:id="accountHintLabel" text="Tai khoan mac dinh: admin / admin" textFill="#5f6d7a" />
             </children>
         </VBox>

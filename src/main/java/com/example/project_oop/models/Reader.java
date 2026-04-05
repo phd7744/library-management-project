@@ -5,6 +5,7 @@ public class Reader {
     private String fullName;
     private String phone;
     private double debt;
+    private boolean firstLogin;
     private String status;
     private String username;
     private String password;
@@ -13,10 +14,15 @@ public class Reader {
     }
 
     public Reader(int id, String fullName, String phone, double debt, String status, String username, String password) {
+        this(id, fullName, phone, debt, false, status, username, password);
+    }
+
+    public Reader(int id, String fullName, String phone, double debt, boolean firstLogin, String status, String username, String password) {
         this.id = id;
         this.fullName = fullName;
         this.phone = phone;
         this.debt = debt;
+        this.firstLogin = firstLogin;
         this.status = status;
         this.username = username;
         this.password = password;
@@ -52,6 +58,14 @@ public class Reader {
 
     public void setDebt(double debt) {
         this.debt = debt;
+    }
+
+    public boolean isFirstLogin() {
+        return firstLogin;
+    }
+
+    public void setFirstLogin(boolean firstLogin) {
+        this.firstLogin = firstLogin;
     }
 
     public String getStatus(){return status;}

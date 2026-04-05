@@ -4,19 +4,17 @@ import com.example.project_oop.MainApp;
 import com.example.project_oop.service.LoginRole;
 import com.example.project_oop.service.LoginService;
 import com.example.project_oop.service.LoginSession;
-import com.example.project_oop.utils.AppLogger;
 import javafx.event.ActionEvent;
-import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Labeled;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -58,7 +56,6 @@ public class LoginController {
     @FXML
     public void handleRoleSelection(ActionEvent event) {
         updateRoleUi(getSelectedRole());
-        AppLogger.logUserAction("Switch login role to " + getSelectedRole().getDisplayName());
     }
 
     @FXML
@@ -81,13 +78,11 @@ public class LoginController {
         LoginSession.setCurrentUser(normalizedUsername, selectedRole);
         LOGGER.log(Level.INFO, "Login success: role={0}, username={1}",
                 new Object[]{selectedRole.getDisplayName(), normalizedUsername});
-        AppLogger.logUserAction("Login success");
 
         try {
             FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/com/example/project_oop/fxml/main-view.fxml"));
             Parent root = loader.load();
-            Scene mainScene = new Scene(root, 1280, 960);
-            attachUserActionLogger(mainScene);
+            Scene mainScene = new Scene(root);
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(mainScene);
@@ -95,8 +90,24 @@ public class LoginController {
             stage.setResizable(true);
             stage.centerOnScreen();
         } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "Open main screen failed after login", e);
             messageLabel.setText("Khong the mo man hinh chinh.");
+        }
+    }
+
+    @FXML
+    public void handleOpenCustomerLogin(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/com/example/project_oop/fxml/customer-login-view.fxml"));
+            Parent root = loader.load();
+
+            Stage customerStage = new Stage();
+            customerStage.initModality(Modality.APPLICATION_MODAL);
+            customerStage.setTitle("Customer Login Test");
+            customerStage.setScene(new Scene(root));
+            customerStage.setResizable(true);
+            customerStage.showAndWait();
+        } catch (IOException e) {
+            messageLabel.setText("Khong the mo man hinh login customer.");
         }
     }
 
@@ -110,22 +121,5 @@ public class LoginController {
         formTitleLabel.setText("Dang nhap " + role.getDisplayName());
         accountHintLabel.setText("Tai khoan mac dinh: " + role.getDefaultUsername() + " / " + role.getDefaultPassword());
         messageLabel.setText("");
-    }
-
-    private void attachUserActionLogger(Scene scene) {
-        scene.addEventFilter(ActionEvent.ACTION, event -> {
-            EventTarget target = event.getTarget();
-            String actionName = "Unknown";
-
-            if (target instanceof Labeled labeled) {
-                actionName = labeled.getText();
-            } else if (target instanceof Node node && node.getId() != null && !node.getId().isBlank()) {
-                actionName = node.getId();
-            } else if (target != null) {
-                actionName = target.getClass().getSimpleName();
-            }
-
-            AppLogger.logUserAction("UI action: " + actionName);
-        });
     }
 }

@@ -3,7 +3,6 @@ package com.example.project_oop.controller;
 import com.example.project_oop.MainApp;
 import com.example.project_oop.service.LoginRole;
 import com.example.project_oop.service.LoginSession;
-import com.example.project_oop.utils.AppLogger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,13 +37,11 @@ public class MainController {
 
         userNameLabel.setText(username);
         userRoleLabel.setText(role.getDisplayName());
-        AppLogger.logUserAction("Open main screen");
     }
 
     @FXML
     public void showDashBoard(ActionEvent event) {
         try {
-            AppLogger.logUserAction("Open Dashboard");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project_oop/fxml/dash-board.fxml"));
             Parent dashBoardView = loader.load();
             mainBorderPane.setCenter(dashBoardView);
@@ -58,7 +55,6 @@ public class MainController {
     @FXML
     public void showBookInventory(ActionEvent event) {
         try {
-            AppLogger.logUserAction("Open Book Inventory");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project_oop/fxml/book-inventory-view.fxml"));
             Parent bookInventoryView = loader.load();
             mainBorderPane.setCenter(bookInventoryView);
@@ -71,7 +67,6 @@ public class MainController {
     @FXML
     public void showReaderRecords(ActionEvent event) {
         try {
-            AppLogger.logUserAction("Open Reader Records");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project_oop/fxml/reader-records-view.fxml"));
             Parent readerRecordsView = loader.load();
             mainBorderPane.setCenter(readerRecordsView);
@@ -84,7 +79,6 @@ public class MainController {
     @FXML
     public void showLoanPage(ActionEvent event){
         try{
-            AppLogger.logUserAction("Open Loan Return");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project_oop/fxml/loan-return-view.fxml"));
             Parent loanPageView = loader.load();
             mainBorderPane.setCenter(loanPageView);
@@ -96,7 +90,6 @@ public class MainController {
     @FXML
     public void showReportPage(ActionEvent event){
         try{
-            AppLogger.logUserAction("Open Report");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project_oop/fxml/report-view.fxml"));
             Parent reportPageView = loader.load();
             mainBorderPane.setCenter(reportPageView);
@@ -108,7 +101,6 @@ public class MainController {
     @FXML
     public void showCategoryPage(ActionEvent event) {
         try {
-            AppLogger.logUserAction("Open Category");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project_oop/fxml/category-view.fxml"));
             Parent categoryView = loader.load();
             mainBorderPane.setCenter(categoryView);
@@ -127,7 +119,6 @@ public class MainController {
 
             LOGGER.log(Level.INFO, "Logout: role={0}, username={1}",
                 new Object[]{currentRole.getDisplayName(), currentUsername});
-                AppLogger.logUserAction("Logout");
 
             LoginSession.clear();
 
