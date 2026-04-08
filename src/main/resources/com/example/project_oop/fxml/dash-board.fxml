@@ -20,7 +20,7 @@
     <children>
 
         <VBox spacing="5.0">
-            <Label text="Welcome back, Admin!" textFill="#64748b">
+            <Label fx:id="welcomeLabel" text="Welcome back, Admin!" textFill="#64748b">
                 <font><Font name="System Bold" size="14.0" /></font>
             </Label>
             <Label text="Library Overview" textFill="#1e2b3c">

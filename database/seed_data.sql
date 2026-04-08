@@ -12,17 +12,17 @@ INSERT INTO employees (full_name, phone_number, shift, role, username, password,
 -- =========================
 -- READERS
 -- =========================
-INSERT INTO readers (full_name, phone_number, reader_type, debt, username, password, status) VALUES
-('Nguyễn Thị Hoa',   '0911111111', 'Sinh viên',   0,      'hoa.nt',    '123456', 'ACTIVE'),
-('Trần Văn Bảo',     '0912222222', 'Sinh viên',   15000,  'bao.tv',    '123456', 'ACTIVE'),
-('Lê Thị Cẩm',       '0913333333', 'Giảng viên',  0,      'cam.lt',    '123456', 'ACTIVE'),
-('Phạm Quốc Dũng',   '0914444444', 'Sinh viên',   30000,  'dung.pq',   '123456', 'ACTIVE'),
-('Hoàng Minh Đức',   '0915555555', 'Học sinh',    0,      'duc.hm',    '123456', 'ACTIVE'),
-('Vũ Thị Lan',       '0916666666', 'Giảng viên',  0,      'lan.vt',    '123456', 'ACTIVE'),
-('Đặng Văn Giang',   '0917777777', 'Sinh viên',   50000,  'giang.dv',  '123456', 'BANNED'),
-('Bùi Thị Hương',    '0918888888', 'Học sinh',    0,      'huong.bt',  '123456', 'ACTIVE'),
-('Đỗ Minh Khoa',     '0919999999', 'Sinh viên',   0,      'khoa.dm',   '123456', 'ACTIVE'),
-('Ngô Thị Linh',     '0920000000', 'Giảng viên',  0,      'linh.nt',   '123456', 'ACTIVE');
+INSERT INTO readers (full_name, phone_number, reader_type, debt, username, password, first_login, status) VALUES
+('Nguyễn Thị Hoa',   '0911111111', 'Sinh viên',   0,      'hoa.nt',    '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 1, 'ACTIVE'),
+('Trần Văn Bảo',     '0912222222', 'Sinh viên',   15000,  'bao.tv',    '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 1, 'ACTIVE'),
+('Lê Thị Cẩm',       '0913333333', 'Giảng viên',  0,      'cam.lt',    '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 1, 'ACTIVE'),
+('Phạm Quốc Dũng',   '0914444444', 'Sinh viên',   30000,  'dung.pq',   '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 1, 'ACTIVE'),
+('Hoàng Minh Đức',   '0915555555', 'Học sinh',    0,      'duc.hm',    '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 1, 'ACTIVE'),
+('Vũ Thị Lan',       '0916666666', 'Giảng viên',  0,      'lan.vt',    '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 1, 'ACTIVE'),
+('Đặng Văn Giang',   '0917777777', 'Sinh viên',   50000,  'giang.dv',  '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 1, 'BANNED'),
+('Bùi Thị Hương',    '0918888888', 'Học sinh',    0,      'huong.bt',  '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 1, 'ACTIVE'),
+('Đỗ Minh Khoa',     '0919999999', 'Sinh viên',   0,      'khoa.dm',   '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 1, 'ACTIVE'),
+('Ngô Thị Linh',     '0920000000', 'Giảng viên',  0,      'linh.nt',   '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 1, 'ACTIVE');
 
 -- =========================
 -- CATEGORIES
