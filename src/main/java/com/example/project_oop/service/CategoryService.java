@@ -1,27 +1,45 @@
 package com.example.project_oop.service;
 
 import com.example.project_oop.config.DatabaseConnection;
-import com.example.project_oop.models.Book;
-import com.example.project_oop.repository.impl.BookRepository;
-
+import com.example.project_oop.models.Category;
+import com.example.project_oop.repository.impl.CategoryRepository;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-public class BookService{
+public class CategoryService{
 
-    private final BookRepository bookRepository = new BookRepository();
+    private final CategoryRepository categoryRepository = new CategoryRepository();
 
-    public List<Book> getAllBooks(){
-        return bookRepository.getAll();
+    public List<Category> getAllCategories(){
+        return categoryRepository.getAll();
     }
 
-    public void addBook(Book book) throws SQLException{
+    public void addCategory(String name) throws SQLException{
         Connection conn = DatabaseConnection.getConnection();
         try{
             conn.setAutoCommit(false);
-            bookRepository.add(book, conn);
+            categoryRepository.add(name, conn);
+            conn.commit();
+        }
+        catch(Exception e){
+            if (conn != null) conn.rollback();
+            throw new RuntimeException(e);
+        }
+        finally{
+            if(conn != null){
+                conn.setAutoCommit(true);
+                conn.close();
+            }
+        }
+    }
+
+    public void updateCategory(int id, String newName) throws SQLException{
+        Connection conn = DatabaseConnection.getConnection();
+        try{
+            conn.setAutoCommit(false);
+            categoryRepository.update(id, newName, conn);
             conn.commit();
         }
         catch(Exception e){
@@ -36,12 +54,19 @@ public class BookService{
         }
     }
 
-    public void updateBook(Book book) throws SQLException{
+    public void deleteCategory(int id) throws SQLException{
         Connection conn = DatabaseConnection.getConnection();
         try{
             conn.setAutoCommit(false);
-            bookRepository.update(book, conn);
+            boolean deleted = categoryRepository.delete(id, conn);
+            if(!deleted){
+                conn.rollback();
+                throw new IllegalStateException("in-use");
+            }
             conn.commit();
+        }
+        catch(IllegalStateException e){
+            throw e;
         }
         catch(Exception e){
             if(conn != null) conn.rollback();
@@ -55,23 +80,7 @@ public class BookService{
         }
     }
 
-    public void deleteBook(int bookId) throws SQLException{
-        Connection conn = DatabaseConnection.getConnection();
-        try{
-            conn.setAutoCommit(false);
-            bookRepository.delete(bookId, conn);
-            conn.commit();
-        }
-        catch(Exception e){
-            if(conn != null) conn.rollback();
-            throw new RuntimeException(e);
-        }
-        finally{
-            if(conn != null){
-                conn.setAutoCommit(true);
-                conn.close();
-            }
-        }
+    public boolean existsByName(String name){
+        return categoryRepository.existsByName(name);
     }
-
 }
