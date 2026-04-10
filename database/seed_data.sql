@@ -1,13 +1,13 @@
 USE librarydb;
 
 -- =========================
--- EMPLOYEES (password = BCrypt của "123456")
+-- EMPLOYEES (password SHA-256 cua "123456")
 -- =========================
-INSERT INTO employees (full_name, phone_number, shift, role, username, password, status) VALUES
-('Nguyễn Văn An',   '0901111111', 'Sáng',  'ADMIN',     'admin',    '$2a$10$7EqJtq98hPqEX7fNZaFWoOe3d1cFbn5PoBjDvToVtEpasHWZf9u7W', 'ACTIVE'),
-('Trần Thị Bích',   '0902222222', 'Chiều', 'LIBRARIAN', 'bich.tran','$2a$10$7EqJtq98hPqEX7fNZaFWoOe3d1cFbn5PoBjDvToVtEpasHWZf9u7W', 'ACTIVE'),
-('Lê Minh Cường',   '0903333333', 'Tối',   'LIBRARIAN', 'cuong.le', '$2a$10$7EqJtq98hPqEX7fNZaFWoOe3d1cFbn5PoBjDvToVtEpasHWZf9u7W', 'ACTIVE'),
-('Phạm Thị Dung',   '0904444444', 'Sáng',  'LIBRARIAN', 'dung.pham','$2a$10$7EqJtq98hPqEX7fNZaFWoOe3d1cFbn5PoBjDvToVtEpasHWZf9u7W', 'INACTIVE');
+INSERT INTO employees (full_name, phone_number, shift, role, username, password, first_login, status) VALUES
+('Nguyễn Văn An',   '0901111111', 'Sáng',  'ADMIN',     'admin',    '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 0, 'ACTIVE'),
+('Trần Thị Bích',   '0902222222', 'Chiều', 'LIBRARIAN', 'bich.tran','8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 1, 'ACTIVE'),
+('Lê Minh Cường',   '0903333333', 'Tối',   'LIBRARIAN', 'cuong.le', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 1, 'ACTIVE'),
+('Phạm Thị Dung',   '0904444444', 'Sáng',  'LIBRARIAN', 'dung.pham','8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 1, 'INACTIVE');
 
 -- =========================
 -- READERS
