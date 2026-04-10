@@ -1,28 +1,22 @@
 package com.example.project_oop.service;
 
 public enum LoginRole {
-    ADMIN("Admin", "admin", "admin"),
-    EMPLOYEE("Employee", "employee", "employee");
+    ADMIN("Admin", "ADMIN"),
+    EMPLOYEE("Employee", "LIBRARIAN");
 
     private final String displayName;
-    private final String defaultUsername;
-    private final String defaultPassword;
+    private final String databaseRole;
 
-    LoginRole(String displayName, String defaultUsername, String defaultPassword) {
+    LoginRole(String displayName, String databaseRole) {
         this.displayName = displayName;
-        this.defaultUsername = defaultUsername;
-        this.defaultPassword = defaultPassword;
+        this.databaseRole = databaseRole;
     }
 
     public String getDisplayName() {
         return displayName;
     }
 
-    public String getDefaultUsername() {
-        return defaultUsername;
-    }
-
-    public String getDefaultPassword() {
-        return defaultPassword;
+    public String getDatabaseRole() {
+        return databaseRole;
     }
 }

@@ -2,7 +2,6 @@ package com.example.project_oop.controller;
 
 import com.example.project_oop.service.LoginRole;
 import com.example.project_oop.service.LoginSession;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
@@ -44,7 +43,7 @@ public class DashBoardController {
     @FXML
     public void initialize() {
         LoginRole role = LoginSession.getCurrentRole() != null ? LoginSession.getCurrentRole() : LoginRole.ADMIN;
-        String username = LoginSession.getCurrentUsername() != null ? LoginSession.getCurrentUsername() : role.getDefaultUsername();
+        String username = LoginSession.getCurrentUsername() != null ? LoginSession.getCurrentUsername() : role.getDisplayName();
         welcomeLabel.setText("Welcome back, " + username + "!");
     }
 }

@@ -8,6 +8,7 @@ import java.util.Locale;
 public class LoginService {
 
     private final ReaderService readerService = new ReaderService();
+    private final EmployeeService employeeService = new EmployeeService();
 
     public enum CustomerLoginStatus {
         SUCCESS,
@@ -36,17 +37,46 @@ public class LoginService {
     }
 
     public boolean authenticate(LoginRole role, String username, String password) {
-        if (role == null || username == null || password == null) {
-            return false;
+        return authenticateAccount(role, username, password).getStatus() == EmployeeService.EmployeeLoginStatus.SUCCESS;
+    }
+
+    public EmployeeService.EmployeeLoginResult authenticateAccount(String username, String password) {
+        if (username == null || password == null) {
+            return new EmployeeService.EmployeeLoginResult(EmployeeService.EmployeeLoginStatus.INVALID_CREDENTIALS, null);
         }
 
         String normalizedUsername = username.trim();
         if (normalizedUsername.isEmpty() || password.isBlank()) {
-            return false;
+            return new EmployeeService.EmployeeLoginResult(EmployeeService.EmployeeLoginStatus.INVALID_CREDENTIALS, null);
         }
 
-        return role.getDefaultUsername().equals(normalizedUsername)
-                && role.getDefaultPassword().equals(password);
+        try {
+            EmployeeService.EmployeeLoginResult adminResult = employeeService.authenticate(LoginRole.ADMIN, normalizedUsername, password);
+            if (adminResult.getStatus() != EmployeeService.EmployeeLoginStatus.INVALID_CREDENTIALS || adminResult.getEmployee() != null) {
+                return adminResult;
+            }
+
+            return employeeService.authenticate(LoginRole.EMPLOYEE, normalizedUsername, password);
+        } catch (SQLException e) {
+            return new EmployeeService.EmployeeLoginResult(EmployeeService.EmployeeLoginStatus.ERROR, null);
+        }
+    }
+
+    public EmployeeService.EmployeeLoginResult authenticateAccount(LoginRole role, String username, String password) {
+        if (role == null || username == null || password == null) {
+            return new EmployeeService.EmployeeLoginResult(EmployeeService.EmployeeLoginStatus.INVALID_CREDENTIALS, null);
+        }
+
+        String normalizedUsername = username.trim();
+        if (normalizedUsername.isEmpty() || password.isBlank()) {
+            return new EmployeeService.EmployeeLoginResult(EmployeeService.EmployeeLoginStatus.INVALID_CREDENTIALS, null);
+        }
+
+        try {
+            return employeeService.authenticate(role, normalizedUsername, password);
+        } catch (SQLException e) {
+            return new EmployeeService.EmployeeLoginResult(EmployeeService.EmployeeLoginStatus.ERROR, null);
+        }
     }
 
     public CustomerLoginResult authenticateCustomer(String username, String password) {

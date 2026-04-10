@@ -4,30 +4,18 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <StackPane prefHeight="380.0" prefWidth="520.0" stylesheets="@../css/style.css" styleClass="login-root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project_oop.controller.LoginController">
-    <fx:define>
-        <ToggleGroup fx:id="roleToggleGroup" />
-    </fx:define>
     <children>
         <VBox alignment="CENTER" maxWidth="380.0" prefWidth="380.0" spacing="12.0" styleClass="login-card">
             <padding>
                 <Insets bottom="28.0" left="28.0" right="28.0" top="28.0" />
             </padding>
             <children>
-                <HBox alignment="CENTER" spacing="10.0">
-                    <children>
-                        <ToggleButton fx:id="adminToggle" mnemonicParsing="false" onAction="#handleRoleSelection" selected="true" styleClass="login-toggle" text="Admin" toggleGroup="$roleToggleGroup" />
-                        <ToggleButton fx:id="employeeToggle" mnemonicParsing="false" onAction="#handleRoleSelection" styleClass="login-toggle" text="Employee" toggleGroup="$roleToggleGroup" />
-                    </children>
-                </HBox>
                 <Label text="Library Manager">
                     <font>
                         <Font name="System Bold" size="28.0" />
@@ -38,13 +26,12 @@
                         <Font name="System Bold" size="18.0" />
                     </font>
                 </Label>
-                <Label text="Dang nhap de tiep tuc" textFill="#5f6d7a" />
                 <TextField fx:id="usernameField" promptText="Ten dang nhap" />
                 <PasswordField fx:id="passwordField" onAction="#handleLogin" promptText="Mat khau" />
                 <Label fx:id="messageLabel" textFill="#c62828" />
                 <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogin" prefHeight="40.0" styleClass="login-btn" text="Dang nhap" />
                 <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleOpenCustomerLogin" prefHeight="36.0" style="-fx-background-color: #e2e8f0; -fx-text-fill: #1f2937; -fx-background-radius: 8;" text="Customer Login (Test)" />
-                <Label fx:id="accountHintLabel" text="Tai khoan mac dinh: admin / admin" textFill="#5f6d7a" />
+                <Label fx:id="accountHintLabel" text="Nhap tai khoan duoc cap trong he thong" textFill="#5f6d7a" />
             </children>
         </VBox>
     </children>
