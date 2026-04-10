@@ -11,10 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="720.0" prefWidth="1030.0" spacing="25.0"
-      styleClass="dashboard-root" stylesheets="@../css/style.css"
-      xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.project_oop.controller.CategoryController">
+<VBox prefHeight="720.0" prefWidth="1030.0" spacing="25.0" styleClass="dashboard-root" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project_oop.controller.category.CategoryController">
    <padding>
       <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
    </padding>
