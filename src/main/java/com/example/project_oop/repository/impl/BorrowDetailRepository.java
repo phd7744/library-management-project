@@ -14,10 +14,11 @@ public class BorrowDetailRepository implements IBorrowDetailRepository {
 
     @Override
     public void add(BorrowDetail detail, Connection conn) throws SQLException {
-        String sqlQuery = """
+        String sqlQuery =
+            """
                 INSERT INTO borrow_details (receipt_id, book_id, due_date)
                 VALUES (?,?,?)
-                """;
+            """;
         try(PreparedStatement ps = conn.prepareStatement(sqlQuery)) {
             ps.setInt(1,detail.getReceiptId());
             ps.setInt(2,detail.getBookId());
@@ -28,12 +29,13 @@ public class BorrowDetailRepository implements IBorrowDetailRepository {
 
     @Override
     public void returnBook(int detailId, Date returnDate, double fineAmount, Connection conn) throws SQLException {
-        String sqlQuery = """
+        String sqlQuery =
+            """
                 UPDATE borrow_details
                 SET return_date = ?,
                     fine_amount = ?
                 WHERE detail_id =?
-                """;
+            """;
         try(PreparedStatement ps = conn.prepareStatement(sqlQuery)) {
             ps.setDate(1, returnDate);
             ps.setDouble(2, fineAmount);
@@ -47,11 +49,12 @@ public class BorrowDetailRepository implements IBorrowDetailRepository {
 
         List<BorrowDetailView> list = new ArrayList<>();
 
-        String sqlQuery = """
-            SELECT bd.id, bd.receipt_id, bd.book_id, b.title, bd.due_date, bd.fine_amount
-            FROM borrow_details bd
-            JOIN books b ON bd.book_id = b.book_id
-            WHERE bd.receipt_id = ?
+        String sqlQuery =
+            """
+                SELECT bd.id, bd.receipt_id, bd.book_id, b.title, bd.due_date, bd.fine_amount
+                FROM borrow_details bd
+                JOIN books b ON bd.book_id = b.book_id
+                WHERE bd.receipt_id = ?
             """;
 
         try (Connection conn = DatabaseConnection.getConnection();
@@ -63,12 +66,12 @@ public class BorrowDetailRepository implements IBorrowDetailRepository {
 
             while (rs.next()) {
                 BorrowDetailView bd = new BorrowDetailView(
-                        rs.getInt("id"),
-                        rs.getInt("receipt_id"),
-                        rs.getInt("book_id"),
-                        rs.getString("title"),
-                        rs.getDate("due_date"),
-                        rs.getDouble("fine_amount")
+                    rs.getInt("id"),
+                    rs.getInt("receipt_id"),
+                    rs.getInt("book_id"),
+                    rs.getString("title"),
+                    rs.getDate("due_date"),
+                    rs.getDouble("fine_amount")
                 );
 
                 list.add(bd);
