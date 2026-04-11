@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="720.0" prefWidth="980.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project_oop.controller.EmployeeManagementController">
+    <top>
+        <VBox spacing="10.0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+            <children>
+                <Label text="Employee Management">
+                    <font>
+                        <Font name="System Bold" size="28.0" />
+                    </font>
+                </Label>
+                <Label text="Tao tai khoan nhan vien moi, username va password duoc sinh tu dong" textFill="#5f6d7a" wrapText="true" />
+            </children>
+        </VBox>
+    </top>
+    <center>
+        <VBox spacing="18.0">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="0.0" />
+            </padding>
+            <children>
+                <GridPane hgap="12.0" vgap="12.0">
+                    <columnConstraints>
+                        <javafx.scene.layout.ColumnConstraints hgrow="ALWAYS" minWidth="120.0" prefWidth="220.0" />
+                        <javafx.scene.layout.ColumnConstraints hgrow="ALWAYS" minWidth="120.0" prefWidth="260.0" />
+                        <javafx.scene.layout.ColumnConstraints hgrow="ALWAYS" minWidth="120.0" prefWidth="220.0" />
+                        <javafx.scene.layout.ColumnConstraints hgrow="ALWAYS" minWidth="120.0" prefWidth="260.0" />
+                    </columnConstraints>
+                    <children>
+                        <VBox spacing="6.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <children>
+                                <Label text="Full Name" />
+                                <TextField fx:id="txtFullName" promptText="Ho va ten nhan vien" />
+                            </children>
+                        </VBox>
+                        <VBox spacing="6.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <children>
+                                <Label text="Phone" />
+                                <TextField fx:id="txtPhone" promptText="So dien thoai" />
+                            </children>
+                        </VBox>
+                        <VBox spacing="6.0" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                            <children>
+                                <Label text="Username" />
+                                <TextField fx:id="txtUsername" promptText="Sinh tu dong" />
+                            </children>
+                        </VBox>
+                        <VBox spacing="6.0" GridPane.columnIndex="3" GridPane.rowIndex="0">
+                            <children>
+                                <Label text="Temporary Password" />
+                                <TextField fx:id="txtTempPassword" promptText="Sinh tu dong" />
+                            </children>
+                        </VBox>
+                    </children>
+                </GridPane>
+
+                <HBox spacing="12.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#handleCreateEmployee" prefHeight="40.0" styleClass="btn-primary" text="Create Employee" textFill="WHITE" />
+                        <Label fx:id="lblMessage" textFill="#b91c1c" />
+                    </children>
+                </HBox>
+
+                <TableView fx:id="employeeTableView" prefHeight="520.0" styleClass="modern-table">
+                    <columns>
+                        <TableColumn fx:id="colEmpId" prefWidth="70.0" text="ID" />
+                        <TableColumn fx:id="colFullName" prefWidth="220.0" text="Full Name" />
+                        <TableColumn fx:id="colPhone" prefWidth="150.0" text="Phone" />
+                        <TableColumn fx:id="colRole" prefWidth="120.0" text="Role" />
+                        <TableColumn fx:id="colUsername" prefWidth="150.0" text="Username" />
+                        <TableColumn fx:id="colStatus" prefWidth="100.0" text="Status" />
+                        <TableColumn fx:id="colFirstLogin" prefWidth="100.0" text="First Login" />
+                    </columns>
+                </TableView>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>

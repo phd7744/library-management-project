@@ -21,12 +21,17 @@
                         <Font name="System Bold" size="28.0" />
                     </font>
                 </Label>
-                <Label text="Dang nhap de tiep tuc" textFill="#5f6d7a" />
+                <Label fx:id="formTitleLabel" text="Dang nhap Admin">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Label>
                 <TextField fx:id="usernameField" promptText="Ten dang nhap" />
                 <PasswordField fx:id="passwordField" onAction="#handleLogin" promptText="Mat khau" />
                 <Label fx:id="messageLabel" textFill="#c62828" />
                 <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogin" prefHeight="40.0" styleClass="login-btn" text="Dang nhap" />
-                <Label text="Tai khoan mau: admin/admin123" textFill="#5f6d7a" />
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleOpenCustomerLogin" prefHeight="36.0" style="-fx-background-color: #e2e8f0; -fx-text-fill: #1f2937; -fx-background-radius: 8;" text="Customer Login (Test)" />
+                <Label fx:id="accountHintLabel" text="Nhap tai khoan duoc cap trong he thong" textFill="#5f6d7a" />
             </children>
         </VBox>
     </children>

@@ -12,4 +12,6 @@ public interface IReaderRepository {
     void add(Reader reader, Connection conn) throws SQLException;
     void update(Reader reader, Connection conn) throws SQLException;
     void delete(int id, Connection conn) throws SQLException;
+    Reader findByUsername(String username, Connection conn) throws SQLException;
+    void updatePassword(int readerId, String newPassword, Connection conn) throws SQLException;
 }

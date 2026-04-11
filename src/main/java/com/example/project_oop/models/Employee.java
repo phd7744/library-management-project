@@ -1,31 +1,30 @@
 package com.example.project_oop.models;
 
-public class Reader {
+public class Employee {
     private int id;
     private String fullName;
     private String phone;
-    private double debt;
-    private boolean firstLogin;
-    private String status;
+    private String shift;
+    private String role;
     private String username;
     private String password;
+    private String status;
+    private boolean firstLogin;
 
-    public Reader() {
+    public Employee() {
     }
 
-    public Reader(int id, String fullName, String phone, double debt, String status, String username, String password) {
-        this(id, fullName, phone, debt, false, status, username, password);
-    }
-
-    public Reader(int id, String fullName, String phone, double debt, boolean firstLogin, String status, String username, String password) {
+    public Employee(int id, String fullName, String phone, String shift, String role,
+                    String username, String password, String status, boolean firstLogin) {
         this.id = id;
         this.fullName = fullName;
         this.phone = phone;
-        this.debt = debt;
-        this.firstLogin = firstLogin;
-        this.status = status;
+        this.shift = shift;
+        this.role = role;
         this.username = username;
         this.password = password;
+        this.status = status;
+        this.firstLogin = firstLogin;
     }
 
     public int getId() {
@@ -52,25 +51,21 @@ public class Reader {
         this.phone = phone;
     }
 
-    public double getDebt() {
-        return debt;
+    public String getShift() {
+        return shift;
     }
 
-    public void setDebt(double debt) {
-        this.debt = debt;
+    public void setShift(String shift) {
+        this.shift = shift;
     }
 
-    public boolean isFirstLogin() {
-        return firstLogin;
+    public String getRole() {
+        return role;
     }
 
-    public void setFirstLogin(boolean firstLogin) {
-        this.firstLogin = firstLogin;
+    public void setRole(String role) {
+        this.role = role;
     }
-
-    public String getStatus(){return status;}
-
-    public void setStatus(String status){this.status = status;}
 
     public String getUsername() {
         return username;
@@ -87,5 +82,20 @@ public class Reader {
     public void setPassword(String password) {
         this.password = password;
     }
-}
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public boolean isFirstLogin() {
+        return firstLogin;
+    }
+
+    public void setFirstLogin(boolean firstLogin) {
+        this.firstLogin = firstLogin;
+    }
+}

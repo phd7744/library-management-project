@@ -30,6 +30,7 @@ import java.util.List;
                         rs.getString("full_name"),
                         rs.getString("phone_number"),
                         rs.getDouble("debt"),
+                    rs.getBoolean("first_login"),
                         rs.getString("status"),
                         rs.getString("username"),
                         rs.getString("password")
@@ -45,8 +46,8 @@ import java.util.List;
     @Override
     public void add(Reader reader, Connection conn) throws SQLException {
         String sqlQuery = """
-                            INSERT INTO readers (full_name, phone_number, debt, username, password, status)
-                            VALUES (?,?,?,?,?,?)
+                            INSERT INTO readers (full_name, phone_number, debt, username, password, first_login, status)
+                            VALUES (?,?,?,?,?,?,?)
                 """;
         try (PreparedStatement ps = conn.prepareStatement(sqlQuery)) {
             ps.setString(1, reader.getFullName());
@@ -54,7 +55,8 @@ import java.util.List;
             ps.setDouble(3, reader.getDebt());
             ps.setString(4, reader.getUsername());
             ps.setString(5, reader.getPassword());
-            ps.setString(6, reader.getStatus());
+            ps.setBoolean(6, true);
+            ps.setString(7, reader.getStatus());
             ps.executeUpdate();
         }
     }
@@ -89,6 +91,64 @@ import java.util.List;
 
         try (PreparedStatement ps = conn.prepareStatement(sqlQuery)) {
             ps.setInt(1, id);
+            ps.executeUpdate();
+        }
+    }
+
+    @Override
+    public Reader findByUsername(String username, Connection conn) throws SQLException {
+        String sqlQuery = """
+            SELECT reader_id, full_name, phone_number, debt, first_login, status, username, password
+                FROM readers
+                WHERE username = ?
+                LIMIT 1
+                """;
+
+        try (PreparedStatement ps = conn.prepareStatement(sqlQuery)) {
+            ps.setString(1, username);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (!rs.next()) {
+                    return null;
+                }
+
+                return new Reader(
+                        rs.getInt("reader_id"),
+                        rs.getString("full_name"),
+                        rs.getString("phone_number"),
+                        rs.getDouble("debt"),
+                        rs.getBoolean("first_login"),
+                        rs.getString("status"),
+                        rs.getString("username"),
+                        rs.getString("password")
+                );
+            }
+        }
+    }
+
+    @Override
+    public void updatePassword(int readerId, String newPassword, Connection conn) throws SQLException {
+        String sqlQuery = """
+                UPDATE readers
+                SET password = ?
+                WHERE reader_id = ?
+                """;
+
+        try (PreparedStatement ps = conn.prepareStatement(sqlQuery)) {
+            ps.setString(1, newPassword);
+            ps.setInt(2, readerId);
+            ps.executeUpdate();
+        }
+    }
+
+    public void markFirstLoginCompleted(int readerId, Connection conn) throws SQLException {
+        String sqlQuery = """
+                UPDATE readers
+                SET first_login = 0
+                WHERE reader_id = ?
+                """;
+
+        try (PreparedStatement ps = conn.prepareStatement(sqlQuery)) {
+            ps.setInt(1, readerId);
             ps.executeUpdate();
         }
     }

@@ -3,6 +3,7 @@ package com.example.project_oop.service;
 import com.example.project_oop.config.DatabaseConnection;
 import com.example.project_oop.models.Reader;
 import com.example.project_oop.repository.impl.ReaderRepository;
+import com.example.project_oop.utils.PasswordUtil;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -24,6 +25,8 @@ public class ReaderService {
 
             reader.setDebt(0);
             reader.setStatus("ACTIVE");
+            reader.setFirstLogin(true);
+            reader.setPassword(hashPassword(reader.getPassword()));
             readerRepository.add(reader, conn);
             conn.commit();
         } catch (Exception e) {
@@ -81,6 +84,40 @@ public class ReaderService {
                 conn.close();
             }
         }
+    }
+
+    public Reader findByUsername(String username) throws SQLException {
+        if (username == null || username.trim().isEmpty()) {
+            return null;
+        }
+
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            return readerRepository.findByUsername(username.trim(), conn);
+        }
+    }
+
+    public void changeReaderPassword(int readerId, String newPassword) throws SQLException {
+        Connection conn = DatabaseConnection.getConnection();
+        try {
+            conn.setAutoCommit(false);
+            readerRepository.updatePassword(readerId, hashPassword(newPassword), conn);
+            readerRepository.markFirstLoginCompleted(readerId, conn);
+            conn.commit();
+        } catch (Exception e) {
+            if (conn != null) {
+                conn.rollback();
+            }
+            throw new RuntimeException(e);
+        } finally {
+            if (conn != null) {
+                conn.setAutoCommit(true);
+                conn.close();
+            }
+        }
+    }
+
+    public String hashPassword(String rawPassword) {
+        return PasswordUtil.hashPassword(rawPassword);
     }
 
 }
