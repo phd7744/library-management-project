@@ -1,37 +1,49 @@
 package com.example.project_oop.models;
 
 public class Publisher {
-    private int id;
-    private String name;
-    private String address;
-    public Publisher(int id, String name, String address)
-    {
-        this.id=id;
-        this.name=name;
-        this.address=address;
+    private int publisherId;
+    private String publisherName;
+    private String publisherAddress;
+
+    public Publisher() {
     }
-    public int getid()
-    {
-        return id;
+
+    public Publisher(int publisherId, String publisherName, String publisherAddress) {
+        this.publisherId = publisherId;
+        this.publisherName = publisherName;
+        this.publisherAddress = publisherAddress;
     }
-    public String getname()
-    {
-        return name;
+
+    public int getPublisherId() {
+        return publisherId;
     }
-    public String getaddress()
-    {
-        return address;
+
+    public void setPublisherId(int publisherId) {
+        this.publisherId = publisherId;
     }
-    public void setName()
-    {
-        this.name= name;
+
+    public String getPublisherName() {
+        return publisherName;
     }
-    public void setAddress()
-    {
-        this.address= address;
+
+    public void setPublisherName(String publisherName) {
+        this.publisherName = publisherName;
     }
-    public void display()
-    {
-        System.out.println(id + " "+ name + " " +address);
+
+    public String getPublisherAddress() {
+        return publisherAddress;
+    }
+
+    public void setPublisherAddress(String publisherAddress) {
+        this.publisherAddress = publisherAddress;
+    }
+
+    @Override
+    public String toString() {
+        return "Publisher{" +
+                "publisherId=" + publisherId +
+                ", publisherName='" + publisherName + '\'' +
+                ", publisherAddress='" + publisherAddress + '\'' +
+                '}';
     }
 }

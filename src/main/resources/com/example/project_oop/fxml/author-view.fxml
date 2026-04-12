@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="720.0" prefWidth="1030.0" spacing="25.0"
+      styleClass="dashboard-root"
+      stylesheets="@../css/style.css"
+      xmlns="http://javafx.com/javafx/25"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.project_oop.controller.author.AuthorController">
+
+   <padding>
+      <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+   </padding>
+
+   <!-- HEADER -->
+   <HBox alignment="CENTER_LEFT" spacing="15.0">
+      <children>
+
+         <Label text="Quản Lý Tác Giả" textFill="#1e2b3c">
+            <font>
+               <Font name="System Bold" size="28.0" />
+            </font>
+         </Label>
+
+         <Region HBox.hgrow="ALWAYS" />
+
+         <!-- SEARCH BOX -->
+         <HBox alignment="CENTER"
+               prefWidth="300.0"
+               style="-fx-background-color: #f5f5f5; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;">
+
+            <children>
+
+               <TextField fx:id="tfSearch"
+                          promptText="Tìm kiếm tác giả..."
+                          style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 13;"
+                          HBox.hgrow="ALWAYS">
+
+                  <font>
+                     <Font size="13.0" />
+                  </font>
+
+               </TextField>
+
+            </children>
+
+         </HBox>
+
+         <!-- ADD BUTTON -->
+         <Button alignment="CENTER"
+                 onAction="#handleAddAuthor"
+                 prefHeight="40.0"
+                 prefWidth="180.0"
+                 style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-border-radius: 5; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 13;"
+                 text="+ Add Author">
+
+            <font>
+               <Font name="System Bold" size="14.0" />
+            </font>
+
+            <effect>
+               <DropShadow color="#4a90e266"
+                           offsetY="4.0"
+                           radius="5.0" />
+            </effect>
+
+         </Button>
+
+      </children>
+   </HBox>
+
+
+   <!-- TABLE CONTAINER -->
+   <VBox style="-fx-background-color: white; -fx-border-radius: 10; -fx-padding: 10;"
+         VBox.vgrow="ALWAYS">
+
+      <effect>
+         <DropShadow color="#e2e8f0"
+                     offsetX="0.0"
+                     offsetY="5.0"
+                     radius="10.0" />
+      </effect>
+
+      <children>
+
+         <TableView fx:id="authorTableView"
+                    style="-fx-font-size: 13;"
+                    VBox.vgrow="ALWAYS">
+
+            <columns>
+
+               <TableColumn fx:id="colAuthorId"
+                            prefWidth="100.0"
+                            style="-fx-alignment: CENTER;"
+                            text="ID">
+                  <style>
+                     -fx-font-weight: bold;
+                  </style>
+               </TableColumn>
+
+               <TableColumn fx:id="colAuthorName"
+                            prefWidth="500.0"
+                            text="Tên Tác Giả" />
+
+               <TableColumn fx:id="colAuthorAction"
+                            minWidth="250.0"
+                            text="Hành Động" />
+
+            </columns>
+
+            <columnResizePolicy>
+               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+
+         </TableView>
+
+      </children>
+
+   </VBox>
+
+</VBox>

@@ -38,6 +38,12 @@ public class MainController {
     private Button btnEmployeeManagement;
 
     @FXML
+    private Button btnAuthorPage;
+
+    @FXML
+    private Button btnPublisherPage;
+
+    @FXML
     public void initialize() {
         LoginRole role = LoginSession.getCurrentRole() != null ? LoginSession.getCurrentRole() : LoginRole.ADMIN;
         String accountUsername = LoginSession.getCurrentUsername();
@@ -146,6 +152,28 @@ public class MainController {
             mainBorderPane.setCenter(employeeManagementView);
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Load Employee Management failed", e);
+        }
+    }
+
+    @FXML
+    public void showAuthorPage(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project_oop/fxml/author-view.fxml"));
+            Parent authorView = loader.load();
+            mainBorderPane.setCenter(authorView);
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Load Author failed", e);
+        }
+    }
+
+    @FXML
+    public void showPublisherPage(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project_oop/fxml/publisher-view.fxml"));
+            Parent publisherView = loader.load();
+            mainBorderPane.setCenter(publisherView);
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Load Publisher failed", e);
         }
     }
 
