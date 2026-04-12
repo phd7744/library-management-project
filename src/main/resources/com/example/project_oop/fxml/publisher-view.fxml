@@ -16,7 +16,13 @@
     <HBox spacing="10" alignment="CENTER_LEFT">
         <TextField fx:id="tfSearch" promptText="Tìm kiếm theo tên NXB..." HBox.hgrow="ALWAYS"
                    style="-fx-font-size: 13; -fx-padding: 8;"/>
-        <Button fx:id="btnAddPublisher" text="+ Thêm NXB" style="-fx-font-size: 13; -fx-padding: 8 20;"/>
+        <Button fx:id="btnAddPublisher"
+        text="+ Add Publisher"
+        style="-fx-font-size: 13; 
+               -fx-padding: 8 20; 
+               -fx-background-color: #2196F3; 
+               -fx-text-fill: white; 
+               -fx-background-radius: 5;"/>
     </HBox>
 
     <TableView fx:id="tblPublisher" editable="false" VBox.vgrow="ALWAYS"

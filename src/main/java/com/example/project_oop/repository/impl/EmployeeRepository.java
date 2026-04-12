@@ -137,4 +137,32 @@ public class EmployeeRepository implements IEmployeeRepository {
             ps.executeUpdate();
         }
     }
+
+    @Override
+    public void update(Employee employee, Connection conn) throws SQLException {
+        String sqlQuery = """
+                UPDATE employees
+                SET full_name = ?, phone_number = ?, role = ?, status = ?
+                WHERE emp_id = ?
+                """;
+
+        try (PreparedStatement ps = conn.prepareStatement(sqlQuery)) {
+            ps.setString(1, employee.getFullName());
+            ps.setString(2, employee.getPhone());
+            ps.setString(3, employee.getRole());
+            ps.setString(4, employee.getStatus());
+            ps.setInt(5, employee.getId());
+            ps.executeUpdate();
+        }
+    }
+
+    @Override
+    public void delete(int employeeId, Connection conn) throws SQLException {
+        String sqlQuery = "DELETE FROM employees WHERE emp_id = ?";
+
+        try (PreparedStatement ps = conn.prepareStatement(sqlQuery)) {
+            ps.setInt(1, employeeId);
+            ps.executeUpdate();
+        }
+    }
 }

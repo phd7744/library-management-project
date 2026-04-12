@@ -13,4 +13,6 @@ public interface IEmployeeRepository {
     void add(Employee employee, Connection conn) throws SQLException;
     void updatePassword(int employeeId, String newPassword, Connection conn) throws SQLException;
     void markFirstLoginCompleted(int employeeId, Connection conn) throws SQLException;
+    void update(Employee employee, Connection conn) throws SQLException;
+    void delete(int employeeId, Connection conn) throws SQLException;
 }

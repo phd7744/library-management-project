@@ -118,6 +118,44 @@ public class EmployeeService {
         return candidate;
     }
 
+    public void updateEmployee(Employee employee) throws SQLException {
+        Connection conn = DatabaseConnection.getConnection();
+        try {
+            conn.setAutoCommit(false);
+            employeeRepository.update(employee, conn);
+            conn.commit();
+        } catch (Exception e) {
+            if (conn != null) {
+                conn.rollback();
+            }
+            throw new SQLException("Không thể cập nhật thông tin nhân viên", e);
+        } finally {
+            if (conn != null) {
+                conn.setAutoCommit(true);
+                conn.close();
+            }
+        }
+    }
+
+    public void deleteEmployee(int employeeId) throws SQLException {
+        Connection conn = DatabaseConnection.getConnection();
+        try {
+            conn.setAutoCommit(false);
+            employeeRepository.delete(employeeId, conn);
+            conn.commit();
+        } catch (Exception e) {
+            if (conn != null) {
+                conn.rollback();
+            }
+            throw new SQLException("Không thể xóa nhân viên", e);
+        } finally {
+            if (conn != null) {
+                conn.setAutoCommit(true);
+                conn.close();
+            }
+        }
+    }
+
     public enum EmployeeLoginStatus {
         SUCCESS,
         REQUIRE_PASSWORD_CHANGE,

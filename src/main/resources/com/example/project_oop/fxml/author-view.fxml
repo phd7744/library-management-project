@@ -28,7 +28,7 @@
    <HBox alignment="CENTER_LEFT" spacing="15.0">
       <children>
 
-         <Label text="Quản Lý Tác Giả" textFill="#1e2b3c">
+         <Label text="Authors" textFill="#1e2b3c">
             <font>
                <Font name="System Bold" size="28.0" />
             </font>
@@ -36,47 +36,20 @@
 
          <Region HBox.hgrow="ALWAYS" />
 
-         <!-- SEARCH BOX -->
-         <HBox alignment="CENTER"
-               prefWidth="300.0"
-               style="-fx-background-color: #f5f5f5; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;">
-
-            <children>
-
-               <TextField fx:id="tfSearch"
-                          promptText="Tìm kiếm tác giả..."
-                          style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 13;"
-                          HBox.hgrow="ALWAYS">
-
-                  <font>
-                     <Font size="13.0" />
-                  </font>
-
-               </TextField>
-
-            </children>
-
-         </HBox>
-
-         <!-- ADD BUTTON -->
-         <Button alignment="CENTER"
+         <!-- SEARCH BOX AND ADD BUTTON -->
+         <TextField fx:id="tfSearch" 
+                    promptText="Tìm kiếm theo tên tác giả..." 
+                    HBox.hgrow="ALWAYS"
+                    style="-fx-font-size: 13; -fx-padding: 8;"/>
+         
+         <Button fx:id="btnAddAuthor"
                  onAction="#handleAddAuthor"
-                 prefHeight="40.0"
-                 prefWidth="180.0"
-                 style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-border-radius: 5; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 13;"
-                 text="+ Add Author">
-
-            <font>
-               <Font name="System Bold" size="14.0" />
-            </font>
-
-            <effect>
-               <DropShadow color="#4a90e266"
-                           offsetY="4.0"
-                           radius="5.0" />
-            </effect>
-
-         </Button>
+                 text="+ Add Author"
+                 style="-fx-font-size: 13; 
+                        -fx-padding: 8 20; 
+                        -fx-background-color: #2196F3; 
+                        -fx-text-fill: white; 
+                        -fx-background-radius: 5;"/>
 
       </children>
    </HBox>

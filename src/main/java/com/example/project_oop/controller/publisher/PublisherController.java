@@ -1,5 +1,7 @@
 package com.example.project_oop.controller.publisher;
 
+import java.util.List;
+
 import com.example.project_oop.models.Publisher;
 import com.example.project_oop.service.PublisherService;
 
@@ -12,8 +14,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
-
-import java.util.List;
 
 public class PublisherController {
 
@@ -79,8 +79,8 @@ public class PublisherController {
 
         colActions.setCellFactory(param -> new TableCell<>(){
 
-            private final Button editBtn = new Button("Sửa");
-            private final Button deleteBtn = new Button("Xóa");
+            private final Button editBtn = new Button("Edit");
+            private final Button deleteBtn = new Button("Delete");
 
             private final HBox pane = new HBox(6, editBtn, deleteBtn);
 
