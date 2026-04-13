@@ -1,6 +1,6 @@
 package com.example.project_oop.controller;
 
-import com.example.project_oop.models.view.RecentTransactionDTO;
+import com.example.project_oop.models.view.RecentTransaction;
 import com.example.project_oop.service.DashboardService;
 import com.example.project_oop.service.LoginRole;
 import com.example.project_oop.service.LoginSession;
@@ -23,7 +23,6 @@ import java.util.Map;
 
 public class DashBoardController {
 
-    // --- Stat card labels ---
     @FXML
     private Label welcomeLabel;
     @FXML
@@ -35,25 +34,21 @@ public class DashBoardController {
     @FXML
     private Label overdueLabel;
 
-    // --- Recent Transactions table ---
     @FXML
-    private TableView<RecentTransactionDTO> recentActivityTable;
+    private TableView<RecentTransaction> recentActivityTable;
     @FXML
-    private TableColumn<RecentTransactionDTO, Integer> receiptIdCol;
+    private TableColumn<RecentTransaction, Integer> receiptIdCol;
     @FXML
-    private TableColumn<RecentTransactionDTO, String> readerCol;
+    private TableColumn<RecentTransaction, String> readerCol;
     @FXML
-    private TableColumn<RecentTransactionDTO, String> bookTitleCol;
+    private TableColumn<RecentTransaction, String> bookTitleCol;
     @FXML
-    private TableColumn<RecentTransactionDTO, Date> dateCol;
+    private TableColumn<RecentTransaction, Date> dateCol;
     @FXML
-    private TableColumn<RecentTransactionDTO, String> statusCol;
+    private TableColumn<RecentTransaction, String> statusCol;
 
-    // --- PieChart ---
     @FXML
     private PieChart bookStatusChart;
-
-    // --- Action Required labels ---
     @FXML
     private Label overdueWarningLabel;
     @FXML
@@ -64,7 +59,6 @@ public class DashBoardController {
 
     @FXML
     public void initialize() {
-        // Welcome label
         LoginRole role = LoginSession.getCurrentRole() != null ? LoginSession.getCurrentRole() : LoginRole.ADMIN;
         String fullName = LoginSession.getCurrentFullName();
         String username = LoginSession.getCurrentUsername();
@@ -72,7 +66,6 @@ public class DashBoardController {
                 : (username != null ? username : role.getDisplayName());
         welcomeLabel.setText("Welcome back, " + displayName + "!");
 
-        // Load statistics
         loadStatCards();
         loadRecentTransactions();
         loadPieChart();
@@ -92,14 +85,12 @@ public class DashBoardController {
     }
 
     private void loadRecentTransactions() {
-        // Setup columns
         receiptIdCol.setCellValueFactory(new PropertyValueFactory<>("receiptId"));
         readerCol.setCellValueFactory(new PropertyValueFactory<>("readerName"));
         bookTitleCol.setCellValueFactory(new PropertyValueFactory<>("bookTitle"));
         dateCol.setCellValueFactory(new PropertyValueFactory<>("borrowDate"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-        // Format date column
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         dateCol.setCellFactory(column -> new TableCell<>() {
             @Override
@@ -113,7 +104,6 @@ public class DashBoardController {
             }
         });
 
-        // Format status column with color badges
         statusCol.setCellFactory(column -> new TableCell<>() {
             @Override
             protected void updateItem(String item, boolean empty) {
@@ -136,12 +126,10 @@ public class DashBoardController {
             }
         });
 
-        // Load data
-        List<RecentTransactionDTO> transactions = dashboardService.getRecentTransactions();
-        ObservableList<RecentTransactionDTO> data = FXCollections.observableArrayList(transactions);
+        List<RecentTransaction> transactions = dashboardService.getRecentTransactions();
+        ObservableList<RecentTransaction> data = FXCollections.observableArrayList(transactions);
         recentActivityTable.setItems(data);
 
-        // Placeholder khi không có data
         recentActivityTable.setPlaceholder(new Label("No recent transactions"));
     }
 
@@ -156,7 +144,6 @@ public class DashBoardController {
             }
         }
 
-        // Nếu không có data, hiển thị placeholder
         if (pieData.isEmpty()) {
             pieData.add(new PieChart.Data("No data", 1));
         }
@@ -164,7 +151,6 @@ public class DashBoardController {
         bookStatusChart.setData(pieData);
         bookStatusChart.setTitle(null);
 
-        // Apply colors after chart is rendered
         bookStatusChart.applyCss();
         bookStatusChart.layout();
         applyPieChartColors();
@@ -185,7 +171,7 @@ public class DashBoardController {
         if (overdueThisWeek > 0) {
             overdueWarningLabel.setText("• " + overdueThisWeek + " books are overdue this week.");
         } else {
-            overdueWarningLabel.setText("• No overdue books this week. ✅");
+            overdueWarningLabel.setText("• No overdue books this week.");
             overdueWarningLabel.setTextFill(javafx.scene.paint.Color.web("#059669"));
         }
 
@@ -193,7 +179,7 @@ public class DashBoardController {
             NumberFormat currencyFormat = NumberFormat.getNumberInstance(Locale.US);
             unpaidFinesLabel.setText("• Total fines: " + currencyFormat.format(totalFines) + " VND");
         } else {
-            unpaidFinesLabel.setText("• No outstanding fines. ✅");
+            unpaidFinesLabel.setText("• No outstanding fines.");
             unpaidFinesLabel.setTextFill(javafx.scene.paint.Color.web("#059669"));
         }
     }
