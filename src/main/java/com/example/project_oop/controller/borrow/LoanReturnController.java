@@ -100,6 +100,9 @@ public class LoanReturnController {
     @FXML
     private Label lblTotalFine;
 
+    @FXML
+    private TextField txtReceiptStatus;
+
     private final BorrowDetailService borrowDetailService = new BorrowDetailService();
     private final BorrowReceiptService borrowReceiptService = new BorrowReceiptService();
     private final BookService bookService = new BookService();
@@ -138,11 +141,33 @@ public class LoanReturnController {
 
     @FXML
     void handleConfirmReturn(ActionEvent event) {
-        int receiptId = Integer.parseInt(txtReceiptId.getText());
+        String receiptText = txtReceiptId.getText().trim();
+        if (receiptText.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Thiếu thông tin", "Vui lòng nhập Receipt ID.");
+            return;
+        }
+
         try {
+            int receiptId = Integer.parseInt(receiptText);
+
+            String status = borrowReceiptService.getStatusByReceiptId(receiptId);
+            if ("RETURNED".equals(status)) {
+                showAlert(Alert.AlertType.WARNING, "Không thể trả", "Phiếu mượn này đã được trả rồi.");
+                return;
+            }
+
             borrowDetailService.returnBorrow(receiptId);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+
+            showAlert(Alert.AlertType.INFORMATION, "Thành công", "Trả sách thành công! Trạng thái đã cập nhật.");
+
+            handleSearchReceipt(event);
+            loadData();
+
+        } catch (NumberFormatException e) {
+            showAlert(Alert.AlertType.ERROR, "Lỗi", "Receipt ID phải là số.");
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Lỗi", "Không thể trả sách: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -209,25 +234,46 @@ public class LoanReturnController {
 
     @FXML
     void handleSearchReceipt(ActionEvent event) {
-        int receiptId = Integer.parseInt(txtReceiptId.getText());
+        String receiptText = txtReceiptId.getText().trim();
+        if (receiptText.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Thiếu thông tin", "Vui lòng nhập Receipt ID.");
+            return;
+        }
+
         try {
+            int receiptId = Integer.parseInt(receiptText);
+
+            String status = borrowReceiptService.getStatusByReceiptId(receiptId);
+            if (status == null) {
+                showAlert(Alert.AlertType.ERROR, "Lỗi", "Không tìm thấy phiếu mượn với ID: " + receiptId);
+                txtReceiptStatus.setText("");
+                tblBorrowedBooks.getItems().clear();
+                return;
+            }
+
+            txtReceiptStatus.setText(status);
+
+            if ("RETURNED".equals(status)) {
+                txtReceiptStatus.setStyle("-fx-text-fill: #ef4444; -fx-font-weight: bold;");
+                btnConfirmReturn.setDisable(true);
+            } else {
+                txtReceiptStatus.setStyle("-fx-text-fill: #166534; -fx-font-weight: bold;");
+                btnConfirmReturn.setDisable(false);
+            }
+
             List<BorrowDetail> list = borrowDetailService.getAllBorrowDetail(receiptId);
             LocalDate today = LocalDate.now();
             double total = 0;
 
             for (BorrowDetail bd : list) {
                 double fine = 0;
-                if ((bd.getReturnDate() == null)) {
+                if (bd.getReturnDate() == null) {
                     LocalDate dueDate = bd.getDueDate().toLocalDate();
-
                     long daysLate = ChronoUnit.DAYS.between(dueDate, today);
-
                     fine = Math.max(daysLate, 0) * 100;
-
                 } else {
                     fine = bd.getFineAmount();
                 }
-
                 bd.setFineAmount(fine);
                 total += fine;
             }
@@ -235,8 +281,12 @@ public class LoanReturnController {
             ObservableList<BorrowDetail> borrowDetailList = FXCollections.observableArrayList(list);
             tblBorrowedBooks.setItems(borrowDetailList);
             lblTotalFine.setText(String.format("%.0f", total));
+
+        } catch (NumberFormatException e) {
+            showAlert(Alert.AlertType.ERROR, "Lỗi", "Receipt ID phải là số.");
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            showAlert(Alert.AlertType.ERROR, "Lỗi", "Lỗi khi tìm phiếu mượn: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 

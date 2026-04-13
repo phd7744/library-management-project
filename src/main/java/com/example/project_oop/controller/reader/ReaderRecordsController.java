@@ -105,27 +105,38 @@ public class ReaderRecordsController {
                     Reader reader = getTableView().getItems().get(getIndex());
 
                     Button editBtn = new Button("Edit");
-                    Button deleteBtn = new Button("Delete");
+                    Button deactivateBtn = new Button("Deactivate");
 
                     editBtn.setStyle("-fx-background-color: #2ecc71ff; -fx-text-fill: white;");
-                    deleteBtn.setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white;");
+                    deactivateBtn.setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white;");
+
+                    if ("INACTIVE".equals(reader.getStatus())) {
+                        deactivateBtn.setDisable(true);
+                        deactivateBtn.setText("Inactive");
+                    }
 
                     editBtn.setOnAction(e -> {
-                        System.out.println("Edit: " + reader.getFullName());
                         handleEditReader(reader);
                     });
 
-                    deleteBtn.setOnAction(e -> {
-                        System.out.println("Delete: " + reader.getFullName());
-                        try {
-                            readerService.deleteReader(reader.getId());
-                        } catch (SQLException ex) {
-                            throw new RuntimeException(ex);
-                        }
-                        loadData();
+                    deactivateBtn.setOnAction(e -> {
+                        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+                        confirm.setTitle("Xác nhận");
+                        confirm.setHeaderText(null);
+                        confirm.setContentText("Bạn có chắc muốn vô hiệu hóa độc giả \"" + reader.getFullName() + "\"?");
+                        confirm.showAndWait().ifPresent(response -> {
+                            if (response == ButtonType.OK) {
+                                try {
+                                    readerService.deleteReader(reader.getId());
+                                    loadData();
+                                } catch (SQLException ex) {
+                                    ex.printStackTrace();
+                                }
+                            }
+                        });
                     });
 
-                    setGraphic(new javafx.scene.layout.HBox(5, editBtn, deleteBtn));
+                    setGraphic(new javafx.scene.layout.HBox(5, editBtn, deactivateBtn));
                 }
             }
         });

@@ -85,7 +85,8 @@ import java.util.List;
     @Override
     public void delete(int id, Connection conn) throws SQLException {
         String sqlQuery = """
-                DELETE FROM readers
+                UPDATE readers
+                SET status = 'INACTIVE'
                 WHERE reader_id = ?
                 """;
 
