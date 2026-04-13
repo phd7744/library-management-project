@@ -94,7 +94,7 @@ public class LoginController {
         String fullName = employee != null ? employee.getFullName() : null;
         LoginSession.setCurrentUser(normalizedUsername, resolvedRole, employeeId, fullName);
         LOGGER.log(Level.INFO, "Login success: role={0}, username={1}, employeeId={2}, fullName={3}",
-            new Object[]{resolvedRole.getDisplayName(), normalizedUsername, employeeId, fullName});
+                new Object[]{resolvedRole.getDisplayName(), normalizedUsername, employeeId, fullName});
 
         try {
             FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/com/example/project_oop/fxml/main-view.fxml"));

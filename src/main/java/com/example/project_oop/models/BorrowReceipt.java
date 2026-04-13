@@ -3,7 +3,7 @@ package com.example.project_oop.models;
 import java.util.Date;
 
 public class BorrowReceipt {
-    private int id;
+    private int receiptId;
     private int readerId;
     private int empId;
     private Date borrowDate;
@@ -12,20 +12,20 @@ public class BorrowReceipt {
     public BorrowReceipt() {
     }
 
-    public BorrowReceipt(int id, int readerId, int empId, Date borrowDate, String status) {
-        this.id = id;
+    public BorrowReceipt(int receiptId, int readerId, int empId, Date borrowDate, String status) {
+        this.receiptId = receiptId;
         this.readerId = readerId;
         this.empId = empId;
         this.borrowDate = borrowDate;
         this.status = status;
     }
 
-    public int getId() {
-        return id;
+    public int getReceiptId() {
+        return receiptId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setReceiptId(int receiptId) {
+        this.receiptId = receiptId;
     }
 
     public int getReaderId() {

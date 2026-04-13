@@ -1,30 +1,32 @@
 package com.example.project_oop.controller.borrow;
 
 import com.example.project_oop.models.BorrowDetail;
-import com.example.project_oop.models.Reader;
+import com.example.project_oop.models.BorrowReceipt;
 import com.example.project_oop.models.view.BorrowDetailView;
 import com.example.project_oop.models.view.BorrowReceiptView;
 import com.example.project_oop.models.Book;
+import com.example.project_oop.service.BookService;
 import com.example.project_oop.service.BorrowDetailService;
+import com.example.project_oop.service.BorrowReceiptService;
+import com.example.project_oop.service.LoginSession;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LoanReturnController {
 
     @FXML
-    private TableView<BorrowReceiptView> activeLoansTable;
+    private TableView<BorrowReceipt> activeLoansTable;
 
     @FXML
     private Button btnAddBook;
@@ -53,7 +55,6 @@ public class LoanReturnController {
     @FXML
     private TableColumn<BorrowReceiptView, Integer> colTotalBooks;
 
-
     @FXML
     private TableColumn<BorrowReceiptView, Integer> colReceiptId;
 
@@ -69,7 +70,6 @@ public class LoanReturnController {
     @FXML
     private TableColumn<BorrowDetailView, Double> colReturnFine;
 
-
     @FXML
     private TableColumn<Book, Integer> colSelectedBookId;
 
@@ -80,7 +80,7 @@ public class LoanReturnController {
     private DatePicker dpDueDate;
 
     @FXML
-    private TableView<BorrowDetailView> tblBorrowedBooks;
+    private TableView<BorrowDetail> tblBorrowedBooks;
 
     @FXML
     private TableView<Book> tblSelectedBooks;
@@ -97,11 +97,16 @@ public class LoanReturnController {
     @FXML
     private TextField txtSearchLoan;
 
-    private final BorrowDetailService borrowDetailService = new BorrowDetailService();
+    @FXML
+    private Label lblTotalFine;
 
+    private final BorrowDetailService borrowDetailService = new BorrowDetailService();
+    private final BorrowReceiptService borrowReceiptService = new BorrowReceiptService();
+    private final BookService bookService = new BookService();
+    private ObservableList<Book> selectedBooks = FXCollections.observableArrayList();
 
     @FXML
-    public void initialize(){
+    public void initialize() {
 
         // 1. Danh sách book mượn
         colSelectedBookId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -118,37 +123,128 @@ public class LoanReturnController {
         colReaderName.setCellValueFactory(new PropertyValueFactory<>("readerName"));
         colTotalBooks.setCellValueFactory(new PropertyValueFactory<>("totalBooks"));
         colBorrowDate.setCellValueFactory(new PropertyValueFactory<>("borrowDate"));
-        colDueDate.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
+        tblSelectedBooks.setItems(selectedBooks);
+
+        loadData();
     }
 
-    @FXML
-    void handleAddBookToList(ActionEvent event) {
-
+    void loadData() {
+        List<BorrowReceipt> brList = borrowReceiptService.getAllReceipt();
+        ObservableList<BorrowReceipt> borrowReceiptObservableList = FXCollections.observableArrayList(brList);
+        activeLoansTable.setItems(borrowReceiptObservableList);
     }
 
     @FXML
     void handleConfirmReturn(ActionEvent event) {
-
+        int receiptId = Integer.parseInt(txtReceiptId.getText());
+        try {
+            borrowDetailService.returnBorrow(receiptId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
     void handleIssueBook(ActionEvent event) {
+        String readerIdText = txtReaderId.getText().trim();
+        if (readerIdText.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Thiếu thông tin", "Vui lòng nhập Reader ID.");
+            return;
+        }
 
+        if (dpDueDate.getValue() == null) {
+            showAlert(Alert.AlertType.WARNING, "Thiếu thông tin", "Vui lòng chọn ngày hẹn trả.");
+            return;
+        }
+
+        if (selectedBooks.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Thiếu thông tin", "Vui lòng thêm ít nhất 1 cuốn sách.");
+            return;
+        }
+
+        try {
+            int readerId = Integer.parseInt(readerIdText);
+            LocalDate dueLocalDate = dpDueDate.getValue();
+            Date dueDate = Date.valueOf(dueLocalDate);
+
+            BorrowReceipt receipt = new BorrowReceipt();
+            receipt.setReaderId(readerId);
+            receipt.setEmpId(LoginSession.getCurrentEmployeeId());
+            receipt.setBorrowDate(Date.valueOf(LocalDate.now()));
+            receipt.setStatus("BORROWING");
+
+            borrowReceiptService.issueBook(receipt, new ArrayList<>(selectedBooks), dueDate);
+
+            showAlert(Alert.AlertType.INFORMATION, "Thành công", "Tạo phiếu mượn thành công!");
+
+            txtReaderId.clear();
+            txtBookId.clear();
+            dpDueDate.setValue(null);
+            selectedBooks.clear();
+
+            loadData();
+
+        } catch (NumberFormatException e) {
+            showAlert(Alert.AlertType.ERROR, "Lỗi", "Reader ID phải là số.");
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Lỗi", "Không thể tạo phiếu mượn: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void handleAddBookToList(ActionEvent event) throws SQLException {
+        int bookId = Integer.parseInt(txtBookId.getText().trim());
+
+        Book book = bookService.getBookById(bookId);
+
+        if (book != null) {
+            selectedBooks.add(book);
+        } else {
+            System.out.println("Không tìm thấy sách");
+        }
     }
 
     @FXML
     void handleSearchReceipt(ActionEvent event) {
         int receiptId = Integer.parseInt(txtReceiptId.getText());
         try {
-            List<BorrowDetailView> list = borrowDetailService.getAllBorrowDetail(receiptId);
-            ObservableList<BorrowDetailView> borrowDetailList = FXCollections.observableArrayList(list);
+            List<BorrowDetail> list = borrowDetailService.getAllBorrowDetail(receiptId);
+            LocalDate today = LocalDate.now();
+            double total = 0;
+
+            for (BorrowDetail bd : list) {
+                double fine = 0;
+                if ((bd.getReturnDate() == null)) {
+                    LocalDate dueDate = bd.getDueDate().toLocalDate();
+
+                    long daysLate = ChronoUnit.DAYS.between(dueDate, today);
+
+                    fine = Math.max(daysLate, 0) * 100;
+
+                } else {
+                    fine = bd.getFineAmount();
+                }
+
+                bd.setFineAmount(fine);
+                total += fine;
+            }
+
+            ObservableList<BorrowDetail> borrowDetailList = FXCollections.observableArrayList(list);
             tblBorrowedBooks.setItems(borrowDetailList);
+            lblTotalFine.setText(String.format("%.0f", total));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
+    private void showAlert(Alert.AlertType type, String title, String content) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 }

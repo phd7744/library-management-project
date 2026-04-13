@@ -74,4 +74,27 @@ public class BookService{
         }
     }
 
+
+    public Book getBookById(int bookId) throws SQLException{
+        Connection conn = DatabaseConnection.getConnection();
+        Book book = null;
+        try{
+            conn.setAutoCommit(false);
+            book = bookRepository.getById(bookId, conn);
+            conn.commit();
+        }
+        catch(Exception e){
+            if(conn != null) conn.rollback();
+            throw new RuntimeException(e);
+        }
+        finally{
+            if(conn != null){
+                conn.setAutoCommit(true);
+                conn.close();
+            }
+        }
+        return book;
+    }
+
+
 }

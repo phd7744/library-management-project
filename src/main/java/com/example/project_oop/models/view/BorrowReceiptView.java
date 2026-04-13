@@ -1,33 +1,22 @@
 package com.example.project_oop.models.view;
 
-import java.sql.Date;
+import com.example.project_oop.models.BorrowDetail;
+import com.example.project_oop.models.BorrowReceipt;
 
-public class BorrowReceiptView {
-    private int receiptId;
+import java.util.Date;
+
+public class BorrowReceiptView extends BorrowReceipt {
     private String readerName;
-    private int totalBooks;    
-    private Date borrowDate;
-    private Date dueDate;
-    private String status;
+    private int totalBooks;
 
     public BorrowReceiptView() {
     }
 
-    public BorrowReceiptView(int receiptId, String readerName, int totalBooks, Date borrowDate, Date dueDate, String status) {
-        this.receiptId = receiptId;
+
+    public BorrowReceiptView(int id, int readerId, int empId, Date borrowDate, String status, String readerName, int totalBooks) {
+        super(id, readerId, empId, borrowDate, status);
         this.readerName = readerName;
         this.totalBooks = totalBooks;
-        this.borrowDate = borrowDate;
-        this.dueDate = dueDate;
-        this.status = status;
-    }
-
-    public int getReceiptId() {
-        return receiptId;
-    }
-
-    public void setReceiptId(int receiptId) {
-        this.receiptId = receiptId;
     }
 
     public String getReaderName() {
@@ -44,29 +33,5 @@ public class BorrowReceiptView {
 
     public void setTotalBooks(int totalBooks) {
         this.totalBooks = totalBooks;
-    }
-
-    public Date getBorrowDate() {
-        return borrowDate;
-    }
-
-    public void setBorrowDate(Date borrowDate) {
-        this.borrowDate = borrowDate;
-    }
-
-    public Date getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(Date dueDate) {
-        this.dueDate = dueDate;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 }
