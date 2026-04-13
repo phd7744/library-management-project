@@ -56,7 +56,8 @@ CREATE TABLE categories (
 -- =========================
 CREATE TABLE publishers (
   pub_id INT AUTO_INCREMENT PRIMARY KEY,
-  pub_name VARCHAR(100) NOT NULL
+  pub_name VARCHAR(100) NOT NULL,
+  pub_address VARCHAR(255)
 );
 
 -- =========================

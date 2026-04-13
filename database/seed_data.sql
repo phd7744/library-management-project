@@ -62,17 +62,17 @@ INSERT INTO authors (author_name) VALUES
 -- =========================
 -- PUBLISHERS
 -- =========================
-INSERT INTO publishers (pub_name) VALUES
-('NXB Kim Đồng'),
-('NXB Trẻ'),
-('NXB Văn Học'),
-('NXB Tổng Hợp TP.HCM'),
-('NXB Hội Nhà Văn'),
-('NXB Lao Động'),
-('NXB Dân Trí'),
-('NXB Thế Giới'),
-('NXB Chính Trị Quốc Gia'),
-('Alphabooks');
+INSERT INTO publishers (pub_name, pub_address) VALUES
+('NXB Kim Đồng', '41 Trần Hưng Đạo, Hoàn Kiếm, Hà Nội'),
+('NXB Trẻ', '101 Trần Hưng Đạo, Quận 1, TP.HCM'),
+('NXB Văn Học', '54 Giảng Võ, Ba Đình, Hà Nội'),
+('NXB Tổng Hợp TP.HCM', '62 Ngô Thời Nhiệm, Quận 3, TP.HCM'),
+('NXB Hội Nhà Văn', '90 Hàng Đậu, Hoàn Kiếm, Hà Nội'),
+('NXB Lao Động', '69 Trần Hưng Đạo, Hoàn Kiếm, Hà Nội'),
+('NXB Dân Trí', '146 Quán Thánh, Ba Đình, Hà Nội'),
+('NXB Thế Giới', '61 Nơi Mạnh, Quận Hai Bà Trưng, Hà Nội'),
+('NXB Chính Trị Quốc Gia', '49 Đinh Lễ, Hoàn Kiếm, Hà Nội'),
+('Alphabooks', '76 Hải Bà Trưng, Hoàn Kiếm, Hà Nội');
 
 -- =========================
 -- BOOKS

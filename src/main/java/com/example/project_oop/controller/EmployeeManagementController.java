@@ -10,10 +10,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
+import javafx.scene.layout.HBox;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.event.ActionEvent;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class EmployeeManagementController {
     private final EmployeeService employeeService = new EmployeeService();
@@ -29,6 +33,9 @@ public class EmployeeManagementController {
 
     @FXML
     private TextField txtTempPassword;
+
+    @FXML
+    private TextField tfSearch;
 
     @FXML
     private Label lblMessage;
@@ -58,6 +65,12 @@ public class EmployeeManagementController {
     private TableColumn<Employee, Boolean> colFirstLogin;
 
     @FXML
+    private TableColumn<Employee, Void> colActions;
+
+    private final EmployeeEditController editController = new EmployeeEditController(employeeService);
+    private final EmployeeDeleteController deleteController = new EmployeeDeleteController(employeeService);
+
+    @FXML
     public void initialize() {
         colEmpId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colFullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
@@ -74,6 +87,14 @@ public class EmployeeManagementController {
             String generated = UsernameUtil.generateEmployeeUsername(newValue);
             txtUsername.setText(generated.isBlank() ? "employee" : generated);
         });
+
+        // Setup search functionality
+        if (tfSearch != null) {
+            tfSearch.textProperty().addListener((obs, oldVal, newVal) -> searchEmployees(newVal));
+        }
+
+        // Setup action column
+        setupActionColumn();
 
         reloadEmployees();
     }
@@ -108,7 +129,57 @@ public class EmployeeManagementController {
         }
     }
 
+    private void setupActionColumn() {
+        if (colActions == null) {
+            System.err.println("ERROR: colActions is null - FXML binding issue");
+            return;
+        }
+
+        colActions.setCellFactory(param -> new TableCell<Employee, Void>() {
+            private final Button editBtn = new Button("Edit");
+            private final Button deleteBtn = new Button("Delete");
+            private final HBox pane = new HBox(6, editBtn, deleteBtn);
+
+            {
+                editBtn.setStyle("-fx-background-color: #2ecc71ff; -fx-text-fill: white; -fx-cursor: hand; -fx-font-size: 12px;");
+                deleteBtn.setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-cursor: hand; -fx-font-size: 12px;");
+
+                editBtn.setOnAction(event -> {
+                    Employee employee = getTableView().getItems().get(getIndex());
+                    if (editController.show(employee)) {
+                        reloadEmployees();
+                    }
+                });
+
+                deleteBtn.setOnAction(event -> {
+                    Employee employee = getTableView().getItems().get(getIndex());
+                    if (deleteController.show(employee)) {
+                        reloadEmployees();
+                    }
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                setGraphic(empty ? null : pane);
+            }
+        });
+    }
+
+    private void searchEmployees(String searchTerm) {
+        List<Employee> allEmployees = employeeService.getAllEmployees();
+
+        List<Employee> filtered = allEmployees.stream()
+                .filter(emp -> emp.getFullName().toLowerCase().contains(searchTerm.toLowerCase()) ||
+                        emp.getUsername().toLowerCase().contains(searchTerm.toLowerCase()))
+                .toList();
+
+        employeeTableView.setItems(FXCollections.observableArrayList(filtered));
+    }
+
     private void reloadEmployees() {
+        tfSearch.clear();
         employeeTableView.setItems(FXCollections.observableArrayList(employeeService.getAllEmployees()));
     }
 
