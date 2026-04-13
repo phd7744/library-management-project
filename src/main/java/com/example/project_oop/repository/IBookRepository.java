@@ -11,4 +11,5 @@ public interface IBookRepository{
     boolean add(Book book, Connection conn) throws SQLException;
     boolean update(Book book, Connection conn) throws SQLException;
     void delete(int bookId, Connection conn) throws SQLException;
+    Book getById(int bookId, Connection conn) throws SQLException;
 }

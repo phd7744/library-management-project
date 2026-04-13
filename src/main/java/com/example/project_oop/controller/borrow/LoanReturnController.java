@@ -5,6 +5,7 @@ import com.example.project_oop.models.BorrowReceipt;
 import com.example.project_oop.models.view.BorrowDetailView;
 import com.example.project_oop.models.view.BorrowReceiptView;
 import com.example.project_oop.models.Book;
+import com.example.project_oop.service.BookService;
 import com.example.project_oop.service.BorrowDetailService;
 import com.example.project_oop.service.BorrowReceiptService;
 import javafx.collections.FXCollections;
@@ -24,7 +25,7 @@ import java.util.List;
 public class LoanReturnController {
 
     @FXML
-    private TableView<BorrowReceiptView> activeLoansTable;
+    private TableView<BorrowReceipt> activeLoansTable;
 
     @FXML
     private Button btnAddBook;
@@ -53,7 +54,6 @@ public class LoanReturnController {
     @FXML
     private TableColumn<BorrowReceiptView, Integer> colTotalBooks;
 
-
     @FXML
     private TableColumn<BorrowReceiptView, Integer> colReceiptId;
 
@@ -68,7 +68,6 @@ public class LoanReturnController {
 
     @FXML
     private TableColumn<BorrowDetailView, Double> colReturnFine;
-
 
     @FXML
     private TableColumn<Book, Integer> colSelectedBookId;
@@ -102,9 +101,11 @@ public class LoanReturnController {
 
     private final BorrowDetailService borrowDetailService = new BorrowDetailService();
     private final BorrowReceiptService borrowReceiptService = new BorrowReceiptService();
+    private final BookService bookService = new BookService();
+    private ObservableList<Book> selectedBooks = FXCollections.observableArrayList();
 
     @FXML
-    public void initialize(){
+    public void initialize() {
 
         // 1. Danh sách book mượn
         colSelectedBookId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -124,38 +125,51 @@ public class LoanReturnController {
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
 
+        tblSelectedBooks.setItems(selectedBooks);
+
+
         loadData();
     }
 
-    @SuppressWarnings("unchecked")
-    void loadData(){
+    void loadData() {
         List<BorrowReceipt> brList = borrowReceiptService.getAllReceipt();
-        // Repository trả về List<BorrowReceiptView> (subclass), cast an toàn
-        ObservableList<BorrowReceiptView> items = FXCollections.observableArrayList(
-                (List<BorrowReceiptView>)(List<?>) brList
-        );
-        activeLoansTable.setItems(items);
+        ObservableList<BorrowReceipt> borrowReceiptObservableList = FXCollections.observableArrayList(brList);
+        activeLoansTable.setItems(borrowReceiptObservableList);
     }
 
-    @FXML
-    void handleAddBookToList(ActionEvent event) {
 
-    }
 
     @FXML
     void handleConfirmReturn(ActionEvent event) {
         int receiptId = Integer.parseInt(txtReceiptId.getText());
         try {
             borrowDetailService.returnBorrow(receiptId);
-        } catch (SQLException e){
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
     @FXML
     void handleIssueBook(ActionEvent event) {
+        BorrowReceipt borrowReceipt = new BorrowReceipt();
+        int readId = Integer.parseInt(txtReaderId.getText().trim());
 
+        borrowReceipt.setReaderId(readId);
     }
+
+    @FXML
+    void handleAddBookToList(ActionEvent event) throws SQLException {
+        int bookId = Integer.parseInt(txtBookId.getText().trim());
+
+        Book book = bookService.getBookById(bookId);
+
+        if (book != null) {
+            selectedBooks.add(book);
+        } else {
+            System.out.println("Không tìm thấy sách");
+        }
+    }
+
 
     @FXML
     void handleSearchReceipt(ActionEvent event) {
@@ -167,13 +181,12 @@ public class LoanReturnController {
 
             for (BorrowDetail bd : list) {
                 double fine = 0;
-                if ( (bd.getReturnDate() == null)){
+                if ((bd.getReturnDate() == null)) {
                     LocalDate dueDate = bd.getDueDate().toLocalDate();
 
                     long daysLate = ChronoUnit.DAYS.between(dueDate, today);
 
                     fine = Math.max(daysLate, 0) * 100;
-
 
                 } else {
                     fine = bd.getFineAmount();

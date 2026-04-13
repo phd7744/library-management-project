@@ -170,4 +170,44 @@ public class BookRepository implements IBookRepository{
         }
         return -1;
     }
+
+    @Override
+    public Book getById(int bookId, Connection conn) {
+        String sql = """
+        SELECT b.book_id, b.isbn, b.title,
+               c.category_name, a.author_name, p.pub_name,
+               b.publish_year, b.quantity, b.status
+        FROM books b
+        LEFT JOIN categories c ON b.category_id = c.category_id
+        LEFT JOIN authors a    ON b.author_id = a.author_id
+        LEFT JOIN publishers p ON b.pub_id = p.pub_id
+        WHERE b.book_id = ?
+    """;
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, bookId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return new Book(
+                            rs.getInt("book_id"),
+                            rs.getString("isbn"),
+                            rs.getString("title"),
+                            rs.getString("category_name"),
+                            rs.getString("author_name"),
+                            rs.getString("pub_name"),
+                            rs.getInt("publish_year"),
+                            rs.getInt("quantity"),
+                            rs.getString("status")
+                    );
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }
