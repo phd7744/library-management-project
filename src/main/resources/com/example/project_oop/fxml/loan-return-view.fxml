@@ -179,7 +179,6 @@
                 <TableColumn fx:id="colReaderName" prefWidth="160.0" text="Reader Name" />
                 <TableColumn fx:id="colTotalBooks" prefWidth="90.0" text="Total Books" />
                 <TableColumn fx:id="colBorrowDate" prefWidth="110.0" text="Borrow Date" />
-                <TableColumn fx:id="colDueDate" prefWidth="110.0" text="Due Date" />
                 <TableColumn fx:id="colStatus" prefWidth="110.0" text="Status" />
             </columns>
             <columnResizePolicy>

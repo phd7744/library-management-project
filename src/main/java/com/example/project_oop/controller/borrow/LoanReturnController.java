@@ -1,24 +1,24 @@
 package com.example.project_oop.controller.borrow;
 
 import com.example.project_oop.models.BorrowDetail;
-import com.example.project_oop.models.Reader;
+import com.example.project_oop.models.BorrowReceipt;
 import com.example.project_oop.models.view.BorrowDetailView;
 import com.example.project_oop.models.view.BorrowReceiptView;
 import com.example.project_oop.models.Book;
 import com.example.project_oop.service.BorrowDetailService;
+import com.example.project_oop.service.BorrowReceiptService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LoanReturnController {
@@ -80,7 +80,7 @@ public class LoanReturnController {
     private DatePicker dpDueDate;
 
     @FXML
-    private TableView<BorrowDetailView> tblBorrowedBooks;
+    private TableView<BorrowDetail> tblBorrowedBooks;
 
     @FXML
     private TableView<Book> tblSelectedBooks;
@@ -97,8 +97,11 @@ public class LoanReturnController {
     @FXML
     private TextField txtSearchLoan;
 
-    private final BorrowDetailService borrowDetailService = new BorrowDetailService();
+    @FXML
+    private Label lblTotalFine;
 
+    private final BorrowDetailService borrowDetailService = new BorrowDetailService();
+    private final BorrowReceiptService borrowReceiptService = new BorrowReceiptService();
 
     @FXML
     public void initialize(){
@@ -118,9 +121,20 @@ public class LoanReturnController {
         colReaderName.setCellValueFactory(new PropertyValueFactory<>("readerName"));
         colTotalBooks.setCellValueFactory(new PropertyValueFactory<>("totalBooks"));
         colBorrowDate.setCellValueFactory(new PropertyValueFactory<>("borrowDate"));
-        colDueDate.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
+
+        loadData();
+    }
+
+    @SuppressWarnings("unchecked")
+    void loadData(){
+        List<BorrowReceipt> brList = borrowReceiptService.getAllReceipt();
+        // Repository trả về List<BorrowReceiptView> (subclass), cast an toàn
+        ObservableList<BorrowReceiptView> items = FXCollections.observableArrayList(
+                (List<BorrowReceiptView>)(List<?>) brList
+        );
+        activeLoansTable.setItems(items);
     }
 
     @FXML
@@ -130,7 +144,12 @@ public class LoanReturnController {
 
     @FXML
     void handleConfirmReturn(ActionEvent event) {
-
+        int receiptId = Integer.parseInt(txtReceiptId.getText());
+        try {
+            borrowDetailService.returnBorrow(receiptId);
+        } catch (SQLException e){
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
@@ -142,13 +161,34 @@ public class LoanReturnController {
     void handleSearchReceipt(ActionEvent event) {
         int receiptId = Integer.parseInt(txtReceiptId.getText());
         try {
-            List<BorrowDetailView> list = borrowDetailService.getAllBorrowDetail(receiptId);
-            ObservableList<BorrowDetailView> borrowDetailList = FXCollections.observableArrayList(list);
+            List<BorrowDetail> list = borrowDetailService.getAllBorrowDetail(receiptId);
+            LocalDate today = LocalDate.now();
+            double total = 0;
+
+            for (BorrowDetail bd : list) {
+                double fine = 0;
+                if ( (bd.getReturnDate() == null)){
+                    LocalDate dueDate = bd.getDueDate().toLocalDate();
+
+                    long daysLate = ChronoUnit.DAYS.between(dueDate, today);
+
+                    fine = Math.max(daysLate, 0) * 100;
+
+
+                } else {
+                    fine = bd.getFineAmount();
+                }
+
+                bd.setFineAmount(fine);
+                total += fine;
+            }
+
+            ObservableList<BorrowDetail> borrowDetailList = FXCollections.observableArrayList(list);
             tblBorrowedBooks.setItems(borrowDetailList);
+            lblTotalFine.setText(String.format("%.0f", total));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
 }

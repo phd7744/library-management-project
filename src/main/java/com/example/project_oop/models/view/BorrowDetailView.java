@@ -1,47 +1,33 @@
 package com.example.project_oop.models.view;
 
+import com.example.project_oop.models.BorrowDetail;
+
 import java.sql.Date;
 
-public class BorrowDetailView {
-    private int id;
-    private int receiptId;
+public class BorrowDetailView extends BorrowDetail {
     private int bookId;
     private String bookTitle;
-    private Date dueDate;
-    private double fineAmount;
 
     public BorrowDetailView(){
     }
 
-    public BorrowDetailView(int id, int receiptId, int bookId, String bookTitle, Date dueDate, double fineAmount) {
-        this.id = id;
-        this.receiptId = receiptId;
+    public BorrowDetailView(int bookId, String bookTitle) {
         this.bookId = bookId;
         this.bookTitle = bookTitle;
-        this.dueDate = dueDate;
-        this.fineAmount = fineAmount;
     }
 
-    public int getId() {
-        return id;
+    public BorrowDetailView(int id, int receiptId, int bookId, Date borrowDate, Date dueDate, Date returnDate, double fineAmount, int bookId1, String bookTitle) {
+        super(id, receiptId, bookId, borrowDate, dueDate, returnDate, fineAmount);
+        this.bookId = bookId1;
+        this.bookTitle = bookTitle;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getReceiptId() {
-        return receiptId;
-    }
-
-    public void setReceiptId(int receiptId) {
-        this.receiptId = receiptId;
-    }
-
+    @Override
     public int getBookId() {
         return bookId;
     }
 
+    @Override
     public void setBookId(int bookId) {
         this.bookId = bookId;
     }
@@ -52,21 +38,5 @@ public class BorrowDetailView {
 
     public void setBookTitle(String bookTitle) {
         this.bookTitle = bookTitle;
-    }
-
-    public Date getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(Date dueDate) {
-        this.dueDate = dueDate;
-    }
-
-    public double getFineAmount() {
-        return fineAmount;
-    }
-
-    public void setFineAmount(double fineAmount) {
-        this.fineAmount = fineAmount;
     }
 }
