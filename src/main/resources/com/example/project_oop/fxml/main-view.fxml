@@ -50,7 +50,7 @@
                             <padding><Insets left="40.0" /></padding>
                             <graphic>
                                 <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                    <image><Image url="@../img/avatar.jpg" /></image>
+                                    <image><Image url="@../img/dashboard.png" /></image>
                                 </ImageView>
                             </graphic>
                             <VBox.margin><Insets left="10.0" right="10.0" /></VBox.margin>
@@ -61,7 +61,7 @@
                             <padding><Insets left="40.0" /></padding>
                             <graphic>
                                 <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                    <image><Image url="@../img/avatar.jpg" /></image>
+                                    <image><Image url="@../img/catalog.png" /></image>
                                 </ImageView>
                             </graphic>
                             <VBox.margin><Insets left="10.0" right="10.0" /></VBox.margin>
@@ -72,7 +72,7 @@
                             <padding><Insets left="40.0" /></padding>
                             <graphic>
                                 <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                    <image><Image url="@../img/avatar.jpg" /></image>
+                                    <image><Image url="@../img/options-lines.png" /></image>
                                 </ImageView>
                             </graphic>
                             <VBox.margin><Insets left="10.0" right="10.0" /></VBox.margin>
@@ -83,7 +83,7 @@
                             <padding><Insets left="40.0" /></padding>
                             <graphic>
                                 <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                    <image><Image url="@../img/avatar.jpg" /></image>
+                                    <image><Image url="@../img/teamwork.png" /></image>
                                 </ImageView>
                             </graphic>
                             <VBox.margin><Insets left="10.0" right="10.0" /></VBox.margin>
@@ -94,7 +94,7 @@
                             <padding><Insets left="40.0" /></padding>
                             <graphic>
                                 <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                    <image><Image url="@../img/avatar.jpg" /></image>
+                                    <image><Image url="@../img/user.png" /></image>
                                 </ImageView>
                             </graphic>
                             <VBox.margin><Insets left="10.0" right="10.0" /></VBox.margin>
@@ -105,7 +105,7 @@
                             <padding><Insets left="40.0" /></padding>
                             <graphic>
                                 <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                    <image><Image url="@../img/avatar.jpg" /></image>
+                                    <image><Image url="@../img/approve.png" /></image>
                                 </ImageView>
                             </graphic>
                             <VBox.margin><Insets left="10.0" right="10.0" /></VBox.margin>
@@ -116,7 +116,7 @@
                             <padding><Insets left="40.0" /></padding>
                             <graphic>
                                 <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                    <image><Image url="@../img/avatar.jpg" /></image>
+                                    <image><Image url="@../img/author.png" /></image>
                                 </ImageView>
                             </graphic>
                             <VBox.margin><Insets left="10.0" right="10.0" /></VBox.margin>
@@ -127,7 +127,7 @@
                             <padding><Insets left="40.0" /></padding>
                             <graphic>
                                 <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                    <image><Image url="@../img/avatar.jpg" /></image>
+                                    <image><Image url="@../img/publishing.png" /></image>
                                 </ImageView>
                             </graphic>
                             <VBox.margin><Insets left="10.0" right="10.0" /></VBox.margin>
@@ -138,7 +138,7 @@
                             <padding><Insets left="40.0" /></padding>
                             <graphic>
                                 <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                    <image><Image url="@../img/avatar.jpg" /></image>
+                                    <image><Image url="@../img/key.png" /></image>
                                 </ImageView>
                             </graphic>
                             <VBox.margin><Insets left="10.0" right="10.0" /></VBox.margin>
@@ -152,7 +152,7 @@
                     <padding><Insets left="40.0" /></padding>
                     <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                            <image><Image url="@../img/avatar.jpg" /></image> </ImageView>
+                            <image><Image url="@../img/logout.png" /></image> </ImageView>
                     </graphic>
                     <VBox.margin><Insets bottom="30.0" left="10.0" right="10.0" /></VBox.margin>
                 </Button>

@@ -6,13 +6,13 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <VBox prefHeight="720.0" prefWidth="1030.0" spacing="25.0" styleClass="dashboard-root" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project_oop.controller.DashBoardController">
     <padding>
         <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
@@ -30,54 +30,58 @@
 
         <HBox spacing="20.0">
             <children>
+                <!-- TOTAL BOOKS -->
                 <HBox alignment="CENTER_LEFT" prefHeight="100.0" spacing="15.0" styleClass="stat-card, card-blue" HBox.hgrow="ALWAYS">
                     <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
                     <children>
                         <VBox alignment="CENTER_LEFT" spacing="5.0" HBox.hgrow="ALWAYS">
                             <Label text="TOTAL BOOKS" textFill="#64748b"><font><Font name="System Bold" size="12.0" /></font></Label>
-                            <Label text="24,500" textFill="#1e2b3c"><font><Font name="System Bold" size="26.0" /></font></Label>
+                            <Label fx:id="totalBooksLabel" text="..." textFill="#1e2b3c"><font><Font name="System Bold" size="26.0" /></font></Label>
                         </VBox>
                         <ImageView fitHeight="45.0" fitWidth="45.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
-                            <image><Image url="@../img/avatar.jpg" /></image>
+                            <image><Image url="@../img/book.png" /></image>
                         </ImageView>
                     </children>
                 </HBox>
 
+                <!-- TOTAL READERS -->
                 <HBox alignment="CENTER_LEFT" prefHeight="100.0" spacing="15.0" styleClass="stat-card, card-green" HBox.hgrow="ALWAYS">
                     <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
                     <children>
                         <VBox alignment="CENTER_LEFT" spacing="5.0" HBox.hgrow="ALWAYS">
                             <Label text="TOTAL READERS" textFill="#64748b"><font><Font name="System Bold" size="12.0" /></font></Label>
-                            <Label text="12,350" textFill="#1e2b3c"><font><Font name="System Bold" size="26.0" /></font></Label>
+                            <Label fx:id="totalReadersLabel" text="..." textFill="#1e2b3c"><font><Font name="System Bold" size="26.0" /></font></Label>
                         </VBox>
                         <ImageView fitHeight="45.0" fitWidth="45.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
-                            <image><Image url="@../img/avatar.jpg" /></image>
+                            <image><Image url="@../img/user.png" /></image>
                         </ImageView>
                     </children>
                 </HBox>
 
+                <!-- BOOKS ON LOAN -->
                 <HBox alignment="CENTER_LEFT" prefHeight="100.0" spacing="15.0" styleClass="stat-card, card-orange" HBox.hgrow="ALWAYS">
                     <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
                     <children>
                         <VBox alignment="CENTER_LEFT" spacing="5.0" HBox.hgrow="ALWAYS">
                             <Label text="BOOKS ON LOAN" textFill="#64748b"><font><Font name="System Bold" size="12.0" /></font></Label>
-                            <Label text="8,210" textFill="#1e2b3c"><font><Font name="System Bold" size="26.0" /></font></Label>
+                            <Label fx:id="booksOnLoanLabel" text="..." textFill="#1e2b3c"><font><Font name="System Bold" size="26.0" /></font></Label>
                         </VBox>
                         <ImageView fitHeight="45.0" fitWidth="45.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
-                            <image><Image url="@../img/avatar.jpg" /></image>
+                            <image><Image url="@../img/approve.png" /></image>
                         </ImageView>
                     </children>
                 </HBox>
 
+                <!-- OVERDUE ITEMS -->
                 <HBox alignment="CENTER_LEFT" prefHeight="100.0" spacing="15.0" styleClass="stat-card, card-red" HBox.hgrow="ALWAYS">
                     <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
                     <children>
                         <VBox alignment="CENTER_LEFT" spacing="5.0" HBox.hgrow="ALWAYS">
                             <Label text="OVERDUE ITEMS" textFill="#64748b"><font><Font name="System Bold" size="12.0" /></font></Label>
-                            <Label text="345" textFill="#ef4444"><font><Font name="System Bold" size="26.0" /></font></Label>
+                            <Label fx:id="overdueLabel" text="..." textFill="#ef4444"><font><Font name="System Bold" size="26.0" /></font></Label>
                         </VBox>
                         <ImageView fitHeight="45.0" fitWidth="45.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
-                            <image><Image url="@../img/avatar.jpg" /></image>
+                            <image><Image url="@../img/overdue.png" /></image>
                         </ImageView>
                     </children>
                 </HBox>
@@ -87,6 +91,7 @@
         <HBox spacing="20.0" VBox.vgrow="ALWAYS">
             <children>
 
+                <!-- RECENT TRANSACTIONS TABLE -->
                 <VBox style="-fx-background-color: white; -fx-background-radius: 10;" HBox.hgrow="ALWAYS">
                     <padding><Insets bottom="15.0" left="15.0" right="15.0" top="15.0" /></padding>
                     <effect><DropShadow color="#e2e8f0" offsetX="0.0" offsetY="5.0" radius="10.0" /></effect>
@@ -104,11 +109,11 @@
 
                         <TableView fx:id="recentActivityTable" styleClass="modern-table" VBox.vgrow="ALWAYS">
                             <columns>
-                                <TableColumn prefWidth="80.0" text="Loan ID" />
-                                <TableColumn prefWidth="150.0" text="Reader" />
-                                <TableColumn prefWidth="200.0" text="Book Title" />
-                                <TableColumn prefWidth="100.0" text="Date" />
-                                <TableColumn prefWidth="90.0" text="Status" />
+                                <TableColumn fx:id="receiptIdCol" prefWidth="80.0" text="Loan ID" />
+                                <TableColumn fx:id="readerCol" prefWidth="150.0" text="Reader" />
+                                <TableColumn fx:id="bookTitleCol" prefWidth="200.0" text="Book Title" />
+                                <TableColumn fx:id="dateCol" prefWidth="100.0" text="Date" />
+                                <TableColumn fx:id="statusCol" prefWidth="90.0" text="Status" />
                             </columns>
                             <columnResizePolicy>
                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -117,8 +122,10 @@
                     </children>
                 </VBox>
 
+                <!-- RIGHT SIDEBAR -->
                 <VBox prefWidth="350.0" spacing="20.0" HBox.hgrow="NEVER">
                     <children>
+                        <!-- PIE CHART -->
                         <VBox alignment="CENTER" style="-fx-background-color: white; -fx-background-radius: 10;" VBox.vgrow="ALWAYS">
                             <padding><Insets bottom="15.0" left="15.0" right="15.0" top="15.0" /></padding>
                             <effect><DropShadow color="#e2e8f0" offsetX="0.0" offsetY="5.0" radius="10.0" /></effect>
@@ -130,15 +137,16 @@
                             </children>
                         </VBox>
 
+                        <!-- ACTION REQUIRED -->
                         <VBox style="-fx-background-color: #fff1f2; -fx-border-color: #fecdd3; -fx-border-radius: 8; -fx-background-radius: 8;">
                             <padding><Insets bottom="15.0" left="15.0" right="15.0" top="15.0" /></padding>
                             <children>
-                                <Label text="⚠️ Action Required" textFill="#e11d48">
+                                <Label text="Action Required" textFill="#e11d48">
                                     <font><Font name="System Bold" size="14.0" /></font>
                                 </Label>
                                 <Region prefHeight="5.0" />
-                                <Label text="• 15 books are overdue this week." textFill="#881337" wrapText="true" />
-                                <Label text="• 3 reader memberships expiring today." textFill="#881337" wrapText="true" />
+                                <Label fx:id="overdueWarningLabel" text="Loading..." textFill="#881337" wrapText="true" />
+                                <Label fx:id="unpaidFinesLabel" text="Loading..." textFill="#881337" wrapText="true" />
                             </children>
                         </VBox>
                     </children>
