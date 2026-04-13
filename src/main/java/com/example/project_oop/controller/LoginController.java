@@ -56,21 +56,28 @@ public class LoginController {
 
         LOGGER.log(Level.INFO, "Login attempt: username={0}", normalizedUsername);
 
+        // Kiểm tra input
+        if (normalizedUsername.isEmpty() || password.isEmpty()) {
+            messageLabel.setText("Vui lòng nhập username và password!");
+            return;
+        }
+
         EmployeeService.EmployeeLoginResult result = loginService.authenticateAccount(username, password);
 
         if (result.getStatus() == EmployeeService.EmployeeLoginStatus.INVALID_CREDENTIALS) {
             LOGGER.log(Level.WARNING, "Login failed: username={0}", normalizedUsername);
-            messageLabel.setText("Sai ten dang nhap hoac mat khau.");
+            messageLabel.setText("Sai tên đăng nhập hoặc mật khẩu.");
             return;
         }
 
         if (result.getStatus() == EmployeeService.EmployeeLoginStatus.BANNED) {
-            messageLabel.setText("Tai khoan dang bi baned/banned. Vui long lien he quan tri vien.");
+            messageLabel.setText("Tài khoản đang bị ban. Vui lòng liên hệ quản trị viên.");
             return;
         }
 
         if (result.getStatus() == EmployeeService.EmployeeLoginStatus.ERROR) {
-            messageLabel.setText("Khong the dang nhap luc nay. Vui long thu lai.");
+            messageLabel.setText("Không thể kết nối cơ sở dữ liệu. Vui lòng kiểm tra MySQL đang chạy và database đã được tạo.");
+            LOGGER.log(Level.SEVERE, "Database connection error during login");
             return;
         }
 
@@ -82,10 +89,12 @@ public class LoginController {
             }
         }
 
-        LoginRole resolvedRole = resolveRole(result.getEmployee());
-        LoginSession.setCurrentUser(normalizedUsername, resolvedRole);
-        LOGGER.log(Level.INFO, "Login success: role={0}, username={1}",
-                new Object[]{resolvedRole.getDisplayName(), normalizedUsername});
+        LoginRole resolvedRole = resolveRole(employee);
+        Integer employeeId = employee != null ? employee.getId() : null;
+        String fullName = employee != null ? employee.getFullName() : null;
+        LoginSession.setCurrentUser(normalizedUsername, resolvedRole, employeeId, fullName);
+        LOGGER.log(Level.INFO, "Login success: role={0}, username={1}, employeeId={2}, fullName={3}",
+                new Object[]{resolvedRole.getDisplayName(), normalizedUsername, employeeId, fullName});
 
         try {
             FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/com/example/project_oop/fxml/main-view.fxml"));
@@ -94,11 +103,15 @@ public class LoginController {
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(mainScene);
-            stage.setTitle("Quan Ly Thu Vien");
+            stage.setTitle("Quản Lý Thư Viện");
             stage.setResizable(true);
             stage.centerOnScreen();
         } catch (IOException e) {
-            messageLabel.setText("Khong the mo man hinh chinh.");
+            LOGGER.log(Level.SEVERE, "Error loading main view", e);
+            messageLabel.setText("Không thể mở giao diện chính. Chi tiết: " + e.getMessage());
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Unexpected error during login", e);
+            messageLabel.setText("Lỗi bất ngờ: " + e.getMessage());
         }
     }
 

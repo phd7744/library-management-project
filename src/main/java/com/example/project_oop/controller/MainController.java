@@ -214,11 +214,11 @@ public class MainController {
         try{
             LoginRole currentRole = LoginSession.getCurrentRole() != null ? LoginSession.getCurrentRole() : LoginRole.ADMIN;
             String currentUsername = LoginSession.getCurrentUsername() != null
-                ? LoginSession.getCurrentUsername()
-                : currentRole.getDisplayName();
+                    ? LoginSession.getCurrentUsername()
+                    : currentRole.getDisplayName();
 
             LOGGER.log(Level.INFO, "Logout: role={0}, username={1}",
-                new Object[]{currentRole.getDisplayName(), currentUsername});
+                    new Object[]{currentRole.getDisplayName(), currentUsername});
 
             LoginSession.clear();
 

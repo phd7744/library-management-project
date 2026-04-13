@@ -7,9 +7,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface IBorrowReceiptRepository {
-    void create(BorrowReceipt borrowReceipt, Connection conn) throws SQLException;
+    int create(BorrowReceipt borrowReceipt, Connection conn) throws SQLException;
+
     void getById(int receiptId, Connection conn) throws SQLException;
+
     void getActiveByReaderId(int readerId, Connection conn) throws SQLException;
+
     void updateStatus(int receiptId, String status, Connection conn) throws SQLException;
+
     List<BorrowReceipt> get();
 }

@@ -12,6 +12,20 @@ import java.util.List;
 public class BorrowDetailRepository implements IBorrowDetailRepository {
 
     @Override
+    public void create(BorrowDetail detail, Connection conn) throws SQLException {
+        String sqlQuery = """
+                INSERT INTO borrow_details (receipt_id, book_id, due_date)
+                VALUES (?, ?, ?)
+                """;
+        try (PreparedStatement ps = conn.prepareStatement(sqlQuery)) {
+            ps.setInt(1, detail.getReceiptId());
+            ps.setInt(2, detail.getBookId());
+            ps.setDate(3, detail.getDueDate());
+            ps.executeUpdate();
+        }
+    }
+
+    @Override
     public void returnBook(BorrowDetail bd, Connection conn) throws SQLException {
         String sqlQuery = """
                 UPDATE borrow_details
@@ -40,7 +54,7 @@ public class BorrowDetailRepository implements IBorrowDetailRepository {
                 """;
 
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sqlQuery)) {
+                PreparedStatement ps = conn.prepareStatement(sqlQuery)) {
 
             ps.setInt(1, receiptId);
 

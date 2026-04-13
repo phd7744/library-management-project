@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface IBorrowDetailRepository {
+    void create(BorrowDetail detail, Connection conn) throws SQLException;
+
     void returnBook(BorrowDetail bd, Connection conn) throws SQLException;
+
     List<BorrowDetail> getByReceiptId(int receiptId) throws SQLException;
 }
