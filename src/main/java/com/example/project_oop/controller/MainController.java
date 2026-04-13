@@ -48,7 +48,8 @@ public class MainController {
         LoginRole role = LoginSession.getCurrentRole() != null ? LoginSession.getCurrentRole() : LoginRole.ADMIN;
         String fullName = LoginSession.getCurrentFullName();
         String accountUsername = LoginSession.getCurrentUsername();
-        userNameLabel.setText((fullName != null && !fullName.isBlank()) ? fullName : resolveDisplayName(accountUsername, role));
+        userNameLabel.setText(
+                (fullName != null && !fullName.isBlank()) ? fullName : resolveDisplayName(accountUsername, role));
         userRoleLabel.setText(role.getDisplayName());
 
         boolean isAdmin = role == LoginRole.ADMIN;
@@ -87,11 +88,11 @@ public class MainController {
         }
     }
 
-
     @FXML
     public void showBookInventory(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project_oop/fxml/book-inventory-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/example/project_oop/fxml/book-inventory-view.fxml"));
             Parent bookInventoryView = loader.load();
             mainBorderPane.setCenter(bookInventoryView);
 
@@ -103,7 +104,8 @@ public class MainController {
     @FXML
     public void showReaderRecords(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project_oop/fxml/reader-records-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/example/project_oop/fxml/reader-records-view.fxml"));
             Parent readerRecordsView = loader.load();
             mainBorderPane.setCenter(readerRecordsView);
 
@@ -113,9 +115,10 @@ public class MainController {
     }
 
     @FXML
-    public void showLoanPage(ActionEvent event){
-        try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project_oop/fxml/loan-return-view.fxml"));
+    public void showLoanPage(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/example/project_oop/fxml/loan-return-view.fxml"));
             Parent loanPageView = loader.load();
             mainBorderPane.setCenter(loanPageView);
         } catch (IOException e) {
@@ -124,9 +127,10 @@ public class MainController {
     }
 
     @FXML
-    public void showReportPage(ActionEvent event){
-        try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project_oop/fxml/report-view.fxml"));
+    public void showReportPage(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/example/project_oop/fxml/report-view.fxml"));
             Parent reportPageView = loader.load();
             mainBorderPane.setCenter(reportPageView);
         } catch (IOException e) {
@@ -137,7 +141,8 @@ public class MainController {
     @FXML
     public void showCategoryPage(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project_oop/fxml/category-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/example/project_oop/fxml/category-view.fxml"));
             Parent categoryView = loader.load();
             mainBorderPane.setCenter(categoryView);
         } catch (IOException e) {
@@ -148,7 +153,8 @@ public class MainController {
     @FXML
     public void showEmployeeManagement(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project_oop/fxml/employee-management-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/example/project_oop/fxml/employee-management-view.fxml"));
             Parent employeeManagementView = loader.load();
             mainBorderPane.setCenter(employeeManagementView);
         } catch (IOException e) {
@@ -159,7 +165,8 @@ public class MainController {
     @FXML
     public void showAuthorPage(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project_oop/fxml/author-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/example/project_oop/fxml/author-view.fxml"));
             Parent authorView = loader.load();
             mainBorderPane.setCenter(authorView);
         } catch (IOException e) {
@@ -170,7 +177,8 @@ public class MainController {
     @FXML
     public void showPublisherPage(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project_oop/fxml/publisher-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/example/project_oop/fxml/publisher-view.fxml"));
             Parent publisherView = loader.load();
             mainBorderPane.setCenter(publisherView);
         } catch (IOException e) {
@@ -192,7 +200,8 @@ public class MainController {
                 return;
             }
 
-            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/com/example/project_oop/fxml/employee-password-change-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(
+                    MainApp.class.getResource("/com/example/project_oop/fxml/employee-password-change-view.fxml"));
             Parent root = loader.load();
 
             EmployeePasswordChangeController controller = loader.getController();
@@ -210,19 +219,21 @@ public class MainController {
     }
 
     @FXML
-    public void handleLogout(ActionEvent event){
-        try{
-            LoginRole currentRole = LoginSession.getCurrentRole() != null ? LoginSession.getCurrentRole() : LoginRole.ADMIN;
+    public void handleLogout(ActionEvent event) {
+        try {
+            LoginRole currentRole = LoginSession.getCurrentRole() != null ? LoginSession.getCurrentRole()
+                    : LoginRole.ADMIN;
             String currentUsername = LoginSession.getCurrentUsername() != null
                     ? LoginSession.getCurrentUsername()
                     : currentRole.getDisplayName();
 
             LOGGER.log(Level.INFO, "Logout: role={0}, username={1}",
-                    new Object[]{currentRole.getDisplayName(), currentUsername});
+                    new Object[] { currentRole.getDisplayName(), currentUsername });
 
             LoginSession.clear();
 
-            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/com/example/project_oop/fxml/login-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(
+                    MainApp.class.getResource("/com/example/project_oop/fxml/login-view.fxml"));
             Parent loginView = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

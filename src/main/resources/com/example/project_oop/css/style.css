@@ -4,7 +4,7 @@
 
 /* 1. Nền thanh Sidebar bên trái */
 .sidebar {
-    -fx-background-color: #1e2b3c;
+    -fx-background-color: #3b6998;
 }
 
 /* 2. Nền khu vực Dashboard bên phải */
@@ -18,7 +18,7 @@
     -fx-cursor: hand;
 }
 .sidebar-btn:hover {
-    -fx-background-color: #2b5b84;
+    -fx-background-color: #4a7ab5;
     -fx-background-radius: 5;
 }
 

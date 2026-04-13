@@ -2,17 +2,17 @@ package com.example.project_oop.models.view;
 
 import java.util.Date;
 
-public class RecentTransactionDTO {
+public class RecentTransaction {
     private int receiptId;
     private String readerName;
     private String bookTitle;
     private Date borrowDate;
     private String status;
 
-    public RecentTransactionDTO() {
+    public RecentTransaction() {
     }
 
-    public RecentTransactionDTO(int receiptId, String readerName, String bookTitle, Date borrowDate, String status) {
+    public RecentTransaction(int receiptId, String readerName, String bookTitle, Date borrowDate, String status) {
         this.receiptId = receiptId;
         this.readerName = readerName;
         this.bookTitle = bookTitle;
