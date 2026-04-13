@@ -40,8 +40,9 @@ public class MainController {
     @FXML
     public void initialize() {
         LoginRole role = LoginSession.getCurrentRole() != null ? LoginSession.getCurrentRole() : LoginRole.ADMIN;
+        String fullName = LoginSession.getCurrentFullName();
         String accountUsername = LoginSession.getCurrentUsername();
-        userNameLabel.setText(resolveDisplayName(accountUsername, role));
+        userNameLabel.setText((fullName != null && !fullName.isBlank()) ? fullName : resolveDisplayName(accountUsername, role));
         userRoleLabel.setText(role.getDisplayName());
 
         boolean isAdmin = role == LoginRole.ADMIN;
