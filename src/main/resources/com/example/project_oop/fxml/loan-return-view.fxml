@@ -110,15 +110,10 @@
                 </HBox>
             </VBox>
 
-            <!-- Receipt info -->
-            <VBox fx:id="paneReturnInfo" managed="false" spacing="6.0" style="-fx-background-color: #f0fdf4; -fx-background-radius: 8; -fx-border-color: #bbf7d0; -fx-border-radius: 8;" visible="false">
-                <padding><Insets bottom="10.0" left="12.0" right="12.0" top="10.0" /></padding>
-                <Label fx:id="lblReaderInfo" text="Reader: —" textFill="#166534">
-                    <font><Font name="System Bold" size="12.0" /></font>
-                </Label>
-                <Label fx:id="lblBorrowDate" text="Borrow Date: —" textFill="#475569">
-                    <font><Font size="12.0" /></font>
-                </Label>
+            <!-- Receipt Status -->
+            <VBox spacing="5.0">
+                <Label styleClass="input-label" text="Status" />
+                <TextField fx:id="txtReceiptStatus" editable="false" prefHeight="36.0" styleClass="modern-input" promptText="Search a receipt to see status..." />
             </VBox>
 
             <!-- Books in receipt -->

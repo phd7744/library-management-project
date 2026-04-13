@@ -8,6 +8,7 @@ import com.example.project_oop.repository.impl.BorrowDetailRepository;
 import com.example.project_oop.repository.impl.BorrowReceiptRepository;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import java.sql.Date;
@@ -18,6 +19,19 @@ public class BorrowReceiptService {
 
     public List<BorrowReceipt> getAllReceipt() {
         return borrowReceiptRepository.get();
+    }
+
+    public String getStatusByReceiptId(int receiptId) throws SQLException {
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(
+                    "SELECT status FROM borrow_receipts WHERE receipt_id = ?");
+            ps.setInt(1, receiptId);
+            java.sql.ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getString("status");
+            }
+        }
+        return null;
     }
 
     public void issueBook(BorrowReceipt receipt, List<Book> books, Date dueDate) throws SQLException {
